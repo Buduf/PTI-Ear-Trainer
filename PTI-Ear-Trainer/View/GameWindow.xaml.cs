@@ -19,9 +19,27 @@ namespace PTI_Ear_Trainer.View
     /// </summary>
     public partial class GameWindow : Window
     {
-        public GameWindow()
+        public GameWindow(string gameModeName, int totalGuessNumber = 10)
         {
             InitializeComponent();
+            Title = "PTI Ear Trainer - " + gameModeName;
+            LabelGuessNumber.Content = "1/" + totalGuessNumber;
+        }
+
+        private void ButtonInterval_Click(object sender, RoutedEventArgs e)
+        {
+            Button? buttonInterval = sender as Button;
+            switch (buttonInterval?.Content.ToString())
+            {
+                case null:
+                    throw new ArgumentNullException();
+            }
+        }
+
+        private void ButtonPlay_Click(object sender, RoutedEventArgs e)
+        {
+            ButtonPlay.IsEnabled = false;
+            ButtonPlay.Foreground = Brushes.Gray;
         }
     }
 }
