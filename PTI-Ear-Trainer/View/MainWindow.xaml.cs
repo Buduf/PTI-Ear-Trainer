@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PTI_Ear_Trainer.View;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,10 @@ namespace PTI_Ear_Trainer
         public MainWindow()
         {
             InitializeComponent();
+            //// For testing!
+            //Hide();
+            //GameWindow window = new GameWindow("Practice mode");
+            //window.Show();
         }
     }
 }
