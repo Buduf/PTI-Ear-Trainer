@@ -2,23 +2,14 @@
 {
     public class PTI_Ear_Trainer_Model
     {
-        enum Notes
+        Interval CountInterval(Note note1, Note note2)
         {
-            C = 0, CSharp, D, DSharp, E, F, FSharp, G, GSharp, A, ASharp, B
-        }
-        enum Intervals
-        {
-            P1 = 0, m2, M2, m3, M3, P4, P5, m6, M6, m7, M7, P8
+            return (Interval)Math.Abs((int)note2 - (int)note1);
         }
 
-        Intervals CountInterval(Notes note1, Notes note2)
+        Note CountNote (Note note, Interval interval)
         {
-            return (Intervals)Math.Abs((int)note2 - (int)note1);
-        }
-
-        Notes CountNote (Notes note, Intervals interval)
-        {
-            return (Notes)(((int)note + (int)interval) % 12);
+            return (Note)(((int)note + (int)interval) % 12);
         }
     }
 }
