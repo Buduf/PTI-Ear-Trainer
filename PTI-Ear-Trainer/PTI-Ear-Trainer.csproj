@@ -8,4 +8,8 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\PTI-Ear-Trainer-Model\PTI-Ear-Trainer-Model.csproj" />
+  </ItemGroup>
+
 </Project>
