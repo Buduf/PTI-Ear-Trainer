@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PTI_Ear_Trainer_Model
 {
-    internal enum Note
+    public enum Note
     {
         C = 0, CSharp, D, DSharp, E, F, FSharp, G, GSharp, A, ASharp, B
     }

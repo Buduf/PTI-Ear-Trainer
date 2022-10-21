@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PTI_Ear_Trainer_Model
 {
-    internal class IntervalPuzzle
+    public class IntervalPuzzle
     {
         public Note Note1 { get; private set; }
         public Note Note2 { get; private set; }
