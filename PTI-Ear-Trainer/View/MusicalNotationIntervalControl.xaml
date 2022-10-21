@@ -5,7 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PTI_Ear_Trainer.View"
              mc:Ignorable="d" 
-             Width="200" Height="180" Margin="10,10,10,10">
+             Width="200" Height="180" Margin="5,5,5,5">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Image x:Name="NotationImage" Width="200" Height="150"/>
+        <Label x:Name="Labelnterval" Content="" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center" FontSize="16"/>
     </Grid>
 </UserControl>
