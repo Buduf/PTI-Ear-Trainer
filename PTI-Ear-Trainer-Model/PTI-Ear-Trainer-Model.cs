@@ -4,9 +4,12 @@
     {
         private Random rng;
 
+        public GameDifficulty Difficulty { get; set; }
+
         public PTI_Ear_Trainer_Model()
         {
             this.rng = new Random();
+            this.Difficulty = GameDifficulty.MEDIUM;
         }
 
         static internal Interval CountInterval(Note note1, Note note2)
@@ -21,7 +24,21 @@
 
         private IntervalPuzzle GenerateInterval()
         {
-            throw new NotImplementedException();
+            switch ((int)this.Difficulty)
+            {
+                case (int)GameDifficulty.VERYEASY:
+                    return new IntervalPuzzle(0, (Note)this.rng.Next(2)); // for starters, we always generate a C as the first note
+                case (int)GameDifficulty.EASY:
+                    return new IntervalPuzzle(0, (Note)this.rng.Next(4));
+                case (int)GameDifficulty.MEDIUM:
+                    return new IntervalPuzzle(0, (Note)this.rng.Next(6));
+                case (int)GameDifficulty.HARD:
+                    return new IntervalPuzzle(0, (Note)this.rng.Next(9));
+                case (int)GameDifficulty.VERYHARD:
+                    return new IntervalPuzzle(0, (Note)this.rng.Next(12));
+                default:
+                    return new IntervalPuzzle(0, (Note)this.rng.Next(6));
+            }
         }
     }
 }
