@@ -13,6 +13,13 @@ namespace PTI_Ear_Trainer_Model
 
         private Interval _interval;
 
+        public IntervalPuzzle(Note lowerNote, Note higherNote)
+        {
+            this.Note1 = lowerNote;
+            this.Note2 = higherNote;
+            this.SetInterval(this.Note1, this.Note2);
+        }
+
         public Interval GetInterval()
         {
             return this._interval;
