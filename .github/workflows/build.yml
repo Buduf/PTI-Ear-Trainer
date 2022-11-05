@@ -39,7 +39,7 @@ jobs:
       run: dotnet build -o "build/${{ matrix.configuration }}" -c "${{ matrix.configuration }}" /p:SourceRevisionId="${{ steps.git_short_hash.outputs.result }}"
 
     - name: Execute unit tests
-      run: dotnet test -c "${{ matrix.configuration }}" --no-build --logger trx --results-directory "TestResults-${{ matrix.configuration }}"
+      run: dotnet test -c "${{ matrix.configuration }}" --logger trx --results-directory "TestResults-${{ matrix.configuration }}"
       
     - name: Upload build artifacts
       uses: actions/upload-artifact@v3
