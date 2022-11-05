@@ -1,10 +1,6 @@
 name: Build job
 
-on:
-  push:
-    branches: [ "**" ]
-  pull_request:
-    branches: [ "master" ]
+on: [push, pull request]
 
 jobs:
 
@@ -39,14 +35,21 @@ jobs:
     - name: Clear
       run: dotnet clean && dotnet nuget locals all --clear
 
-    - name: Execute unit tests
-      run: dotnet build
-
     - name: Build
       run: dotnet build -o "build/${{ matrix.configuration }}" -c "${{ matrix.configuration }}" /p:SourceRevisionId="${{ steps.git_short_hash.outputs.result }}"
 
+    - name: Execute unit tests
+      run: dotnet test -c "${{ matrix.configuration }}" --no-build --logger trx --results-directory "TestResults-${{ matrix.configuration }}"
+      
     - name: Upload build artifacts
       uses: actions/upload-artifact@v3
       with:
-        name: Build
-        path: build/Release
+        name: PTI-Ear-Trainer-${{ matrix.configuration }}+${{ steps.git_short_hash.outputs.result }}
+        path: build/${{ matrix.configuration }}
+
+    - name: Upload dotnet test results
+      uses: actions/upload-artifact@v3
+      with:
+        name: dotnet-results-${{ matrix.configuration }}
+        path: TestResults-${{ matrix.configuration }}
+        if: ${{ always() }}
