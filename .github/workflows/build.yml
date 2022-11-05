@@ -1,0 +1,52 @@
+name: Build job
+
+on:
+  push:
+    branches: [ "**" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+
+  build:
+
+    strategy:
+      matrix:
+        configuration: [Debug, Release]
+
+    runs-on: windows-latest
+
+    env:
+      Solution_Name: PTI-Ear-Trainer.sln
+      Test_Project_Path: PTI-Ear-Trainer-Test/PTI-Ear-Trainer-Test.csproj
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: Install .NET Core
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 6.0.x
+
+    - name: Get git short hash
+      id: git_short_hash
+      run: echo "result=$(git rev-parse --short "${{ github.sha }}")" >> $GITHUB_OUTPUT
+      shell: bash
+      
+    - name: Clear
+      run: dotnet clean && dotnet nuget locals all --clear
+
+    - name: Execute unit tests
+      run: dotnet build
+
+    - name: Build
+      run: dotnet build -o "build/${{ matrix.configuration }}" -c "${{ matrix.configuration }}" /p:SourceRevisionId="${{ steps.git_short_hash.outputs.result }}"
+
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: Build
+        path: build/Release
