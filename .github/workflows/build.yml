@@ -52,4 +52,4 @@ jobs:
       with:
         name: dotnet-results-${{ matrix.configuration }}
         path: TestResults-${{ matrix.configuration }}
-        if: ${{ always() }}
+      if: ${{ always() }}
