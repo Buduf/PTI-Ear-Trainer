@@ -31,7 +31,7 @@ namespace PTI_Ear_Trainer_Model
         }
         public void SetInterval(Note note1, Note note2)
         {
-            this._interval = PTI_Ear_Trainer_Model.CountInterval(note1, note2);
+            this._interval = EarTrainer.CountInterval(note1, note2);
         }
     }
 }

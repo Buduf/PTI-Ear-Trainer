@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PTI-Ear-Trainer", "PTI-Ear-
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PTI-Ear-Trainer-Model", "PTI-Ear-Trainer-Model\PTI-Ear-Trainer-Model.csproj", "{832E77E3-381A-4A74-B80A-FD342500753F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PTI-Ear-Trainer-Test", "PTI-Ear-Trainer-Test\PTI-Ear-Trainer-Test.csproj", "{F8CF3E28-3F4E-4702-9CF1-12B8A4157D62}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PTI-Ear-Trainer-Test", "PTI-Ear-Trainer-Test\PTI-Ear-Trainer-Test.csproj", "{F8CF3E28-3F4E-4702-9CF1-12B8A4157D62}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
