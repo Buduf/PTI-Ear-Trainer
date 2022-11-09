@@ -38,5 +38,10 @@ namespace PTI_Ear_Trainer
         {
 
         }
+
+        private void competitive_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
