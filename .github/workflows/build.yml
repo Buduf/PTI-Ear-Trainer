@@ -1,0 +1,58 @@
+name: Build job
+
+on: [push, pull_request]
+
+jobs:
+
+  build:
+
+    strategy:
+      matrix:
+        configuration: [Debug, Release]
+
+    runs-on: windows-latest
+
+    env:
+      Solution_Name: PTI-Ear-Trainer.sln
+      Test_Project_Path: PTI-Ear-Trainer-Test/PTI-Ear-Trainer-Test.csproj
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: Install .NET Core
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 6.0.x
+
+    - name: Get git short hash
+      id: git_short_hash
+      run: echo "result=$(git rev-parse --short "${{ github.sha }}")" >> $GITHUB_OUTPUT
+      shell: bash
+      
+    - name: Clear
+      run: dotnet clean && dotnet nuget locals all --clear
+
+    - name: Install dependencies
+      run: dotnet restore
+  
+    - name: Build
+      run: dotnet build -o "build/${{ matrix.configuration }}" -c "${{ matrix.configuration }}" /p:SourceRevisionId="${{ steps.git_short_hash.outputs.result }}"
+
+    - name: Execute unit tests
+      run: dotnet test -c "${{ matrix.configuration }}" --logger trx --results-directory "TestResults-${{ matrix.configuration }}"
+      
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: PTI-Ear-Trainer-${{ matrix.configuration }}+${{ steps.git_short_hash.outputs.result }}
+        path: build/${{ matrix.configuration }}
+
+    - name: Upload dotnet test results
+      uses: actions/upload-artifact@v3
+      with:
+        name: TestResults-${{ matrix.configuration }}
+        path: TestResults-${{ matrix.configuration }}
+      if: ${{ always() }}
