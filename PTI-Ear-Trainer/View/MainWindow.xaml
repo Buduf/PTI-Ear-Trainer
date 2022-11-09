@@ -5,8 +5,52 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PTI_Ear_Trainer"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="Ear-Trainer" Height="500" Width="450">
+    <Grid x:Name="mainmenu">
+        <StackPanel VerticalAlignment="Top">
+            <Menu Width="Auto" Height="20">
+                <MenuItem Header="_File">
+                    <MenuItem x:Name="newGame" Header="New game" HorizontalAlignment="Left" Width="190"/>
+                    <Separator />
+                    <MenuItem x:Name="leaderboard" Header="Leaderboard" HorizontalAlignment="Left" Width="190"/>
+                    <MenuItem x:Name="export" Header="Export leaderboard" HorizontalAlignment="Left" Width="190"/>
+                    <MenuItem x:Name="reset" Header="Reset leaderboard" HorizontalAlignment="Left" Width="190"/>
+                    <Separator />
+                    <MenuItem x:Name="close" Header="Exit current game" HorizontalAlignment="Left" Width="190"/>
+                    <MenuItem x:Name="appExit" Header="Close" HorizontalAlignment="Left" Width="190"/>
+                </MenuItem>
+                <MenuItem Header="_Options">
+                    <MenuItem x:Name="windowed" Header="Windowed mode" HorizontalAlignment="Left" Width="180"/>
+                    <MenuItem x:Name="bordered" Header="Bordered mode" HorizontalAlignment="Left" Width="180"/>
+                    <MenuItem x:Name="fullscreen" Header="Fullscreen" HorizontalAlignment="Left" Width="180"/>
+                    <Separator/>
+                    <MenuItem x:Name="fontUp" Header="Font size Up" HorizontalAlignment="Left" Width="180"/>
+                    <MenuItem x:Name="fontDown" Header="Font size Down" HorizontalAlignment="Left" Width="180"/>
+                </MenuItem>
+                <MenuItem Header="_Help">
+                    <MenuItem x:Name="tutorial" Header="How to play" HorizontalAlignment="Left" Width="170"/>
+                    <Separator/>
+                    <MenuItem x:Name="feedback" Header="Feedback" HorizontalAlignment="Left" Width="170"/>
+                    <Separator/>
+                    <MenuItem x:Name="about" Header="About" HorizontalAlignment="Left" Width="170"/>
+                </MenuItem>
+            </Menu>
+        </StackPanel>
+        <Button x:Name="New_Game" Content="New Game" HorizontalAlignment="Center" Margin="0,142,0,0" VerticalAlignment="Top" IsDefault="True" Height="59" Width="106" Click="New_Game_Click"/>
+        <Label x:Name="Difficulty1" Content="Difficulty" HorizontalAlignment="Left" Margin="64,332,0,0" VerticalAlignment="Top" Height="35" Width="84" FontSize="16" FontWeight="Bold"/>
+        <Label x:Name="Game_mode" Content="Game mode" HorizontalAlignment="Left" Margin="64,372,0,0" VerticalAlignment="Top" Height="39" Width="110" FontSize="16" FontWeight="Bold"/>
+        <StackPanel HorizontalAlignment="Left" Margin="86,0,0,0" Orientation="Vertical"/>
+        <Canvas x:Name="Game_modes" Margin="174,366,92,179">
+            <RadioButton x:Name="competitive" Content="competitve" Canvas.Left="10" Canvas.Top="16"/>
+            <RadioButton x:Name="casual" Content="casual" Canvas.Left="101" Canvas.Top="16" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <RadioButton x:Name="practice" Content="practice" Canvas.Left="171" Canvas.Top="16" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.024,0.462" />
+        </Canvas>
+        <Canvas x:Name="Difficulties" Margin="154,326,114,222" >
+            <RadioButton x:Name="easy" Content="easy" Canvas.Left="10" Canvas.Top="16"/>
+            <RadioButton x:Name="medium" Content="medium" Canvas.Left="92" Canvas.Top="16" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <RadioButton x:Name="hard" Content="hard" Canvas.Left="178" Canvas.Top="16" HorizontalAlignment="Left" VerticalAlignment="Center" RenderTransformOrigin="0.024,0.462" />
+        </Canvas>
+        <Button x:Name="Leaderboard" Content="Leaderboard" HorizontalAlignment="Center" Margin="0,217,0,0" VerticalAlignment="Top" Height="26" Width="106" Click="New_Game_Click"/>
 
     </Grid>
 </Window>

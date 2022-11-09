@@ -29,5 +29,14 @@ namespace PTI_Ear_Trainer
             //GameWindow window = new GameWindow("Practice mode");
             //window.Show();
         }
+
+        private void New_Game_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
