@@ -12,12 +12,4 @@
     <ProjectReference Include="..\PTI-Ear-Trainer-Model\PTI-Ear-Trainer-Model.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Remove="Resources\GClef.png" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="Resources\GClef.png" />
-  </ItemGroup>
-
 </Project>

@@ -51,6 +51,7 @@
             <RadioButton x:Name="hard" Content="hard" Canvas.Left="178" Canvas.Top="16" HorizontalAlignment="Left" VerticalAlignment="Center" RenderTransformOrigin="0.024,0.462" />
         </Canvas>
         <Button x:Name="Leaderboard" Content="Leaderboard" HorizontalAlignment="Center" Margin="0,217,0,0" VerticalAlignment="Top" Height="26" Width="106" Click="New_Game_Click"/>
+        <Label Content="♯" HorizontalAlignment="Left" Margin="30,108,0,0" VerticalAlignment="Top" Width="22" FontWeight="Bold" FontSize="20" Height="40"/>
 
     </Grid>
 </Window>
