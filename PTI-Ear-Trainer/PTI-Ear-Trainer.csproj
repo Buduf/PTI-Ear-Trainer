@@ -6,6 +6,10 @@
     <RootNamespace>PTI_Ear_Trainer</RootNamespace>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Authors>André Bilik, Ádám Lámfalusi, Dávid Fürdős, Márton Baldauf</Authors>
+    <Company>Eötvös Loránd University (ELTE), Faculty of Informatics</Company>
+    <Copyright>Copyright © André Bilik, Ádám Lámfalusi, Dávid Fürdős, Márton Baldauf 2022</Copyright>
   </PropertyGroup>
 
   <ItemGroup>

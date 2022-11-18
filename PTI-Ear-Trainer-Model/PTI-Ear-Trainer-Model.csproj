@@ -5,6 +5,10 @@
     <RootNamespace>PTI_Ear_Trainer_Model</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Authors>André Bilik, Ádám Lámfalusi, Dávid Fürdős, Márton Baldauf</Authors>
+    <Company>Eötvös Loránd University (ELTE), Faculty of Informatics</Company>
+    <Copyright>Copyright © André Bilik, Ádám Lámfalusi, Dávid Fürdős, Márton Baldauf 2022</Copyright>
   </PropertyGroup>
 
 </Project>
