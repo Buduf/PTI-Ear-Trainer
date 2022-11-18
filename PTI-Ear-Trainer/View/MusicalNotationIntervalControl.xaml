@@ -4,7 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PTI_Ear_Trainer.View"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
+             DataContext="{Binding RelativeSource={RelativeSource Self}}"
              Width="200" Height="180" Margin="5,5,5,5">
     <Grid>
         <Grid.RowDefinitions>
@@ -51,8 +52,65 @@
                  X2="200" Y2="105"
                  Stroke="Black"
                  StrokeThickness="1"/>
-            <Image Source="{StaticResource GClefDrawingImage}" HorizontalAlignment="Left" Canvas.Top="30" VerticalAlignment="Top" Height="99" Width="37"/>
+
+            <!-- The G-Clef -->
+            <Image 
+                Source="{StaticResource GClefDrawingImage}"
+                Canvas.Top="30"
+                Height="99"
+                Width="37"/>
+
+            <!-- Notes -->
+            <Ellipse x:Name="DrawingNote1"
+                Canvas.Left="100"
+                Canvas.Top="112.5"
+                Width="20"
+                Height="15"
+                Fill="{Binding Path=Foreground}"
+                Visibility="Hidden"/>
+            <Ellipse x:Name="DrawingNote2"
+                Canvas.Left="100"
+                Canvas.Top="112.5"
+                Width="20"
+                Height="15"
+                Fill="{Binding Path=Foreground}"
+                Visibility="Hidden"/>
+
+            <!-- Shar signs -->
+            <TextBlock x:Name="SharpSign1"
+                Text="♯"
+                FontSize="42"
+                Canvas.Left="80"
+                Canvas.Top="90"
+                Foreground="{Binding Path=Foreground}"
+                Visibility="Hidden"/>
+            <TextBlock x:Name="SharpSign2"
+                Text="♯"
+                FontSize="42"
+                Canvas.Left="80"
+                Canvas.Top="90"
+                Foreground="{Binding Path=Foreground}"
+                Visibility="Hidden"/>
+
+            <!-- Helper lines -->
+            <Line x:Name="HelperLine1"
+                 X1="95" Y1="120"
+                 X2="125" Y2="120"
+                 Stroke="{Binding Path=Foreground}"
+                 StrokeThickness="1"
+                 Visibility="Hidden"/>
+            <Line x:Name="HelperLine2"
+                 X1="95" Y1="135"
+                 X2="125" Y2="135"
+                 Stroke="{Binding Path=Foreground}"
+                 StrokeThickness="1"
+                 Visibility="Hidden"/>
         </Canvas>
-        <Label x:Name="Labelnterval" Content="" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center" FontSize="16"/>
+        <Label x:Name="Labelnterval"
+               Content="" Grid.Row="1"
+               HorizontalAlignment="Center" VerticalAlignment="Center"
+               FontSize="16"
+               Foreground="{Binding Path=Foreground}"
+               Visibility="Hidden"/>
     </Grid>
 </UserControl>

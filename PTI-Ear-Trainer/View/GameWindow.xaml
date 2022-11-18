@@ -39,6 +39,6 @@
         <StackPanel Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
             <Label x:Name="LabelTimer" Content="1:00" FontSize="20" />
         </StackPanel>
-        <local:MusicalNotationIntervalControl HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Center" IntervalName="Perfect Unison"/>
+        <local:MusicalNotationIntervalControl HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Center"/>
     </Grid>
 </Window>
