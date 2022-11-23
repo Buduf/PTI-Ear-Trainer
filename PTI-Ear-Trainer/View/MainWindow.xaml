@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:PTI_Ear_Trainer"
         mc:Ignorable="d"
         Icon="icon.ico"
-    Title="Ear-Trainer" Height="500" Width="450">
+        WindowStartupLocation="CenterScreen"
+        Title="Ear-Trainer" Height="500" Width="450">
     <Grid x:Name="mainmenu">
         <StackPanel VerticalAlignment="Top">
             <Menu Width="Auto" Height="20">
@@ -18,7 +19,7 @@
                     <MenuItem x:Name="reset" Header="Reset leaderboard" HorizontalAlignment="Left" Width="190"/>
                     <Separator />
                     <MenuItem x:Name="close" Header="Exit current game" HorizontalAlignment="Left" Width="190"/>
-                    <MenuItem x:Name="appExit" Header="Close" HorizontalAlignment="Left" Width="190"/>
+                    <MenuItem x:Name="appExit" Header="Close" HorizontalAlignment="Left" Width="190" Click="Close"/>
                 </MenuItem>
                 <MenuItem Header="_Options">
                     <MenuItem x:Name="windowed" Header="Windowed mode" HorizontalAlignment="Left" Width="180"/>
@@ -38,18 +39,18 @@
             </Menu>
         </StackPanel>
         <Button x:Name="New_Game" Content="New Game" HorizontalAlignment="Center" Margin="0,142,0,0" VerticalAlignment="Top" IsDefault="True" Height="59" Width="106" Click="New_Game_Click"/>
-        <Label x:Name="Difficulty1" Content="Difficulty" HorizontalAlignment="Left" Margin="64,332,0,0" VerticalAlignment="Top" Height="35" Width="84" FontSize="16" FontWeight="Bold"/>
+        <Label x:Name="Difficulty" Content="Difficulty" HorizontalAlignment="Left" Margin="64,332,0,0" VerticalAlignment="Top" Height="35" Width="84" FontSize="16" FontWeight="Bold"/>
         <Label x:Name="Game_mode" Content="Game mode" HorizontalAlignment="Left" Margin="64,372,0,0" VerticalAlignment="Top" Height="39" Width="110" FontSize="16" FontWeight="Bold"/>
         <StackPanel HorizontalAlignment="Left" Margin="86,0,0,0" Orientation="Vertical"/>
         <Canvas x:Name="Game_modes" Margin="174,366,92,179">
-            <RadioButton x:Name="competitive" Content="ranked" Canvas.Left="10" Canvas.Top="16" Checked="competitive_Checked"/>
-            <RadioButton x:Name="casual" Content="survival" Canvas.Left="79" Canvas.Top="16" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-            <RadioButton x:Name="practice" Content="practice" Canvas.Left="155" Canvas.Top="16" HorizontalAlignment="Left" VerticalAlignment="Center" RenderTransformOrigin="0.024,0.462" />
+            <RadioButton x:Name="competitive" Content="ranked" Canvas.Left="10" Canvas.Top="16" GroupName="Gamemode"/>
+            <RadioButton x:Name="casual" Content="survival" Canvas.Left="79" Canvas.Top="16" HorizontalAlignment="Left" VerticalAlignment="Center" GroupName="Gamemode"/>
+            <RadioButton x:Name="practice" Content="practice" Canvas.Left="155" Canvas.Top="16" HorizontalAlignment="Left" VerticalAlignment="Center" RenderTransformOrigin="0.024,0.462" GroupName="Gamemode"/>
         </Canvas>
         <Canvas x:Name="Difficulties" Margin="154,326,114,222" >
-            <RadioButton x:Name="easy" Content="easy" Canvas.Left="10" Canvas.Top="16"/>
-            <RadioButton x:Name="medium" Content="medium" Canvas.Left="92" Canvas.Top="16" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-            <RadioButton x:Name="hard" Content="hard" Canvas.Left="178" Canvas.Top="16" HorizontalAlignment="Left" VerticalAlignment="Center" RenderTransformOrigin="0.024,0.462" />
+            <RadioButton x:Name="easy" Content="easy" Canvas.Left="10" Canvas.Top="16" GroupName="difficulties"/>
+            <RadioButton x:Name="medium" Content="medium" Canvas.Left="92" Canvas.Top="16" HorizontalAlignment="Left" VerticalAlignment="Top" GroupName="difficulties"/>
+            <RadioButton x:Name="hard" Content="hard" Canvas.Left="178" Canvas.Top="16" HorizontalAlignment="Left" VerticalAlignment="Center" RenderTransformOrigin="0.024,0.462" GroupName="difficulties"/>
         </Canvas>
         <Button x:Name="Leaderboard" Content="Leaderboard" HorizontalAlignment="Center" Margin="0,217,0,0" VerticalAlignment="Top" Height="26" Width="106" Click="New_Game_Click"/>
 

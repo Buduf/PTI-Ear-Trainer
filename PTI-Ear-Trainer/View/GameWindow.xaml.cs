@@ -41,5 +41,10 @@ namespace PTI_Ear_Trainer.View
             ButtonPlay.IsEnabled = false;
             ButtonPlay.Foreground = Brushes.Gray;
         }
+        private void Close(object sender, RoutedEventArgs e)
+        {
+            Close();
+            App.Current.Shutdown();
+        }
     }
 }
