@@ -22,6 +22,7 @@ namespace PTI_Ear_Trainer
     /// </summary>
     public partial class MainWindow : Window
     {
+        string name = "Unspecified";
         string difficulty = "Unspecified";
         string gamemode = "Unspecified";
         public MainWindow()
@@ -59,26 +60,40 @@ namespace PTI_Ear_Trainer
                 gamemode = "Practice";
             }
 
-            if(difficulty == "Unspecified" && gamemode == "Unspecified")
+            name = getname.Text;
+
+            if (name == "" && difficulty == "Unspecified" && gamemode == "Unspecified")
             {
-                MessageBox.Show("PLease select difficulty and game mode.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            } else if (difficulty == "Unspecified" && gamemode != "Unspecified")
+                MessageBox.Show("PLease choose a nickname, select difficulty and game mode.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else if (name !="" && difficulty == "Unspecified" && gamemode != "Unspecified")
             {
                 MessageBox.Show("Please select difficulty.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            } else if (difficulty != "Unspecified" && gamemode == "Unspecified")
+            }
+            else if (name !="" && difficulty != "Unspecified" && gamemode == "Unspecified")
             {
                 MessageBox.Show("PLease select game mode.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            else {
+            else if (name == "" && difficulty == "Unspecified" && gamemode != "Unspecified")
+            {
+                MessageBox.Show("Please choose a nickname and difficulty.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            } else if (name =="" && difficulty != "Unspecified" && gamemode == "Unspecified")
+            {
+                MessageBox.Show("PLease choose a nickname and game mode.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            } else if (name =="" && difficulty != "Unspecified" && gamemode != "Unspecified")
+            {
+                MessageBox.Show("PLease choose a nickname.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            } else if (name!="" && difficulty == "Unspecified" && gamemode == "Unspecified")
+            {
+                MessageBox.Show("PLease select difficulty and game mode.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else
+            {
                 this.Hide();
-                GameWindow window = new GameWindow(difficulty);
+                GameWindow window = new GameWindow(name, difficulty, gamemode);
                 window.Show();
             }
             //GameWindow gw = new GameWindow(difficulty,10);
-        }
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
         }
 
         private void Close(object sender, RoutedEventArgs e)
@@ -86,5 +101,7 @@ namespace PTI_Ear_Trainer
             Close();
             App.Current.Shutdown();
         }
+
+
     }
 }

@@ -19,10 +19,16 @@ namespace PTI_Ear_Trainer.View
     /// </summary>
     public partial class GameWindow : Window
     {
-        public GameWindow(string gameModeName, int totalGuessNumber = 10)
+        string name;
+        string difficulty;
+        string gamemode;
+        public GameWindow(string name, string difficulty, string gamemode, int totalGuessNumber = 10)
         {
+            this.name = name;
+            this.difficulty = difficulty;
+            this.gamemode = gamemode;
             InitializeComponent();
-            Title = "PTI Ear Trainer - " + gameModeName;
+            Title = "PTI Ear Trainer - " + difficulty;
             LabelGuessNumber.Content = "1/" + totalGuessNumber;
         }
 

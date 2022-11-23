@@ -53,6 +53,8 @@
             <RadioButton x:Name="hard" Content="hard" Canvas.Left="178" Canvas.Top="16" HorizontalAlignment="Left" VerticalAlignment="Center" RenderTransformOrigin="0.024,0.462" GroupName="difficulties"/>
         </Canvas>
         <Button x:Name="Leaderboard" Content="Leaderboard" HorizontalAlignment="Center" Margin="0,217,0,0" VerticalAlignment="Top" Height="26" Width="106" Click="New_Game_Click"/>
+        <Label x:Name="Player_name" Content="Player name:" HorizontalAlignment="Left" Margin="64,276,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
+        <TextBox x:Name="getname" HorizontalAlignment="Left" Margin="195,283,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="152"/>
 
     </Grid>
 </Window>
