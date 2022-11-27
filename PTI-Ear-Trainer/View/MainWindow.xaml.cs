@@ -26,6 +26,7 @@ namespace PTI_Ear_Trainer
         string name = "Unspecified";
         string difficulty = "Unspecified";
         string gamemode = "Unspecified";
+        protected int x;
         public MainWindow()
         {
             InitializeComponent();
@@ -128,9 +129,19 @@ namespace PTI_Ear_Trainer
             App.Current.Shutdown();
         }
 
-        private void FontUp(object sender, RoutedEventArgs e)
+        private void OpenLeaderboard(object sender, RoutedEventArgs e)
         {
             
+        }
+
+        private void OpenAbout(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void OpenHTP(object sender, RoutedEventArgs e)
+        {
+
         }
 
         protected override void OnClosed(EventArgs e)

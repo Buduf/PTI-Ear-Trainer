@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -59,6 +60,10 @@ namespace PTI_Ear_Trainer.View
             MainWindow window = new MainWindow();
             window.Show();
         }
+        private void Reset(object sender, RoutedEventArgs e)
+        {
+
+        }
         private void Close(object sender, RoutedEventArgs e)
         {
             Close();
@@ -69,5 +74,20 @@ namespace PTI_Ear_Trainer.View
             base.OnClosed(e);
             App.Current.Shutdown();
         }
+        private void OpenLeaderboard(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void OpenAbout(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void OpenHTP(object sender, RoutedEventArgs e)
+        {
+
+        }
+
     }
 }
