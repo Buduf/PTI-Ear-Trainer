@@ -24,10 +24,10 @@ namespace PTI_Ear_Trainer.View
         string gamemode;
         public GameWindow(string name, string difficulty, string gamemode, int totalGuessNumber = 10)
         {
+            InitializeComponent();
             this.name = name;
             this.difficulty = difficulty;
             this.gamemode = gamemode;
-            InitializeComponent();
             Title = "PTI Ear Trainer - " + difficulty;
             LabelGuessNumber.Content = "1/" + totalGuessNumber;
         }
@@ -47,9 +47,26 @@ namespace PTI_Ear_Trainer.View
             ButtonPlay.IsEnabled = false;
             ButtonPlay.Foreground = Brushes.Gray;
         }
+        private void NewGame(object sender, RoutedEventArgs e)
+        {
+            this.Hide();
+            GameWindow window = new GameWindow(name, difficulty, gamemode, 10);
+            window.Show();
+        }
+        private void ExitCurrentGame(object sender, RoutedEventArgs e)
+        {
+            this.Hide();
+            MainWindow window = new MainWindow();
+            window.Show();
+        }
         private void Close(object sender, RoutedEventArgs e)
         {
             Close();
+            App.Current.Shutdown();
+        }
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
             App.Current.Shutdown();
         }
     }

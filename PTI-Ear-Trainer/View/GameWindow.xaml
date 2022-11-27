@@ -4,16 +4,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PTI_Ear_Trainer.View"
+        Icon="icon.ico"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Title="PTI Ear Trainer" Height="500" Width="450" MinHeight="500" MinWidth="450">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="4*"/>
-            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="450*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="5*"/>
+            <RowDefinition Height="4*"/>
             <RowDefinition Height="10*"/>
             <RowDefinition Height="40*"/>
             <RowDefinition Height="10*"/>
@@ -21,40 +21,15 @@
             <RowDefinition Height="10*"/>
             <RowDefinition Height="5*"/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal" Grid.Column="1" Height="37" Width="50">
-            <Label x:Name="LabelGuessNumber" Content="1/10" FontSize="20" />
-        </StackPanel>
-        <Label Content="Placeholder" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.ColumnSpan="2" Margin="189,0,0,0" Height="26" Width="72"/>
-        <Border BorderBrush="Black" BorderThickness="1" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Width="300" Height="180" Grid.ColumnSpan="2" Margin="75,0,0,0"/>
-        <StackPanel Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal" Grid.Column="1" Margin="3,0,0,0" Height="40" Width="40">
-            <Button x:Name="ButtonPlay" Content="▶" Foreground="Green" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center" Width="40" Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Click="ButtonPlay_Click" ToolTip="Replay Interval"/>
-        </StackPanel>
-        <StackPanel Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal" Grid.ColumnSpan="2" Margin="45,0,0,0" Height="30" Width="360">
-            <Button Content="P1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30" Click="ButtonInterval_Click" FontWeight="Bold"/>
-            <Button Content="m2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30" Click="ButtonInterval_Click" FontWeight="Bold"/>
-            <Button Content="M2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30" Click="ButtonInterval_Click" FontWeight="Bold"/>
-            <Button Content="m3" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30" Click="ButtonInterval_Click" FontWeight="Bold"/>
-            <Button Content="M3" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30" Click="ButtonInterval_Click" FontWeight="Bold"/>
-            <Button Content="P4" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30" Click="ButtonInterval_Click" FontWeight="Bold"/>
-            <Button Content="P5" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30" Click="ButtonInterval_Click" FontWeight="Bold"/>
-            <Button Content="m6" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30" Click="ButtonInterval_Click" FontWeight="Bold"/>
-            <Button Content="M6" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30" Click="ButtonInterval_Click" FontWeight="Bold"/>
-            <Button Content="m7" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30" Click="ButtonInterval_Click" FontWeight="Bold"/>
-            <Button Content="M7" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30" Click="ButtonInterval_Click" FontWeight="Bold"/>
-            <Button Content="P8" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30" Click="ButtonInterval_Click" FontWeight="Bold"/>
-        </StackPanel>
-        <StackPanel Grid.Row="5" HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal" Grid.Column="1" Height="37" Width="47">
-            <Label x:Name="LabelTimer" Content="1:00" FontSize="20" />
-        </StackPanel>
-        <Menu Grid.ColumnSpan="2" Margin="0,0,0,54" Grid.RowSpan="2">
+        <Menu>
             <MenuItem Header="_File">
-                <MenuItem x:Name="newGame" Header="New game" HorizontalAlignment="Left" Width="190"/>
+                <MenuItem x:Name="newGame" Header="New game" HorizontalAlignment="Left" Width="190" Click="NewGame"/>
                 <Separator />
                 <MenuItem x:Name="leaderboard" Header="Leaderboard" HorizontalAlignment="Left" Width="190"/>
                 <MenuItem x:Name="export" Header="Export leaderboard" HorizontalAlignment="Left" Width="190"/>
                 <MenuItem x:Name="reset" Header="Reset leaderboard" HorizontalAlignment="Left" Width="190"/>
                 <Separator />
-                <MenuItem x:Name="close" Header="Exit current game" HorizontalAlignment="Left" Width="190"/>
+                <MenuItem x:Name="close" Header="Exit current game" HorizontalAlignment="Left" Width="190" Click="ExitCurrentGame"/>
                 <MenuItem x:Name="appExit" Header="Close" HorizontalAlignment="Left" Width="190" Click="Close"/>
             </MenuItem>
             <MenuItem Header="_Options">
@@ -68,10 +43,33 @@
             <MenuItem Header="_Help">
                 <MenuItem x:Name="tutorial" Header="How to play" HorizontalAlignment="Left" Width="170"/>
                 <Separator/>
-                <MenuItem x:Name="feedback" Header="Feedback" HorizontalAlignment="Left" Width="170"/>
-                <Separator/>
                 <MenuItem x:Name="about" Header="About" HorizontalAlignment="Left" Width="170"/>
             </MenuItem>
         </Menu>
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Grid.Column="1">
+            <Label x:Name="LabelGuessNumber" Content="1/10" FontSize="20" />
+        </StackPanel>
+        <Label Content="Placeholder" Grid.Row="2"  Height="26" Width="72" />
+            <Border BorderBrush="Black" Grid.Row="2" BorderThickness="1"  Width="300" Height="180" />
+            <StackPanel Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Grid.Column="1" Margin="3,0,0,0" Height="40" Width="40">
+            <Button x:Name="ButtonPlay" Content="▶" Foreground="Green" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center" Width="40" Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Click="ButtonPlay_Click" ToolTip="Replay Interval"/>
+        </StackPanel>
+        <StackPanel Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Margin="45,0,0,0" Height="30" Width="395">
+            <Button Content="P1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30" Click="ButtonInterval_Click" FontWeight="Bold" Grid.Column="1" Grid.Row="4"/>
+            <Button Content="m2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30" Click="ButtonInterval_Click" FontWeight="Bold" Grid.Column="1" Grid.Row="4"/>
+            <Button Content="M2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30" Click="ButtonInterval_Click" FontWeight="Bold" Grid.Column="1" Grid.Row="4"/>
+            <Button Content="m3" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30" Click="ButtonInterval_Click" FontWeight="Bold" Grid.Column="1" Grid.Row="4"/>
+            <Button Content="M3" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30" Click="ButtonInterval_Click" FontWeight="Bold" Grid.Column="1" Grid.Row="4"/>
+            <Button Content="P4" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30" Click="ButtonInterval_Click" FontWeight="Bold" Grid.Column="1" Grid.Row="4"/>
+            <Button Content="P5" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30" Click="ButtonInterval_Click" FontWeight="Bold" Grid.Column="1" Grid.Row="4"/>
+            <Button Content="m6" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30" Click="ButtonInterval_Click" FontWeight="Bold" Grid.Column="1" Grid.Row="4"/>
+            <Button Content="M6" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30" Click="ButtonInterval_Click" FontWeight="Bold" Grid.Column="1" Grid.Row="4"/>
+            <Button Content="m7" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30" Click="ButtonInterval_Click" FontWeight="Bold" Grid.Column="1" Grid.Row="4"/>
+            <Button Content="M7" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30" Click="ButtonInterval_Click" FontWeight="Bold" Grid.Column="1" Grid.Row="4"/>
+            <Button Content="P8" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30" Click="ButtonInterval_Click" FontWeight="Bold" Grid.Column="1" Grid.Row="4"/>
+        </StackPanel>
+        <StackPanel Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Grid.Column="1" Height="37" Width="47">
+            <Label x:Name="LabelTimer" Content="1:00" FontSize="20" />
+        </StackPanel>
     </Grid>
 </Window>

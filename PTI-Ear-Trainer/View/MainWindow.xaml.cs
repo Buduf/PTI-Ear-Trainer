@@ -14,11 +14,12 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Diagnostics;
 
 namespace PTI_Ear_Trainer
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    ///<summary>
+    ///Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
@@ -34,33 +35,37 @@ namespace PTI_Ear_Trainer
             //window.Show();
         }
 
+        private void Easy_Checked(object sender, RoutedEventArgs e)
+        {
+            SetDifficulty("Easy");
+        }
+        private void Medium_Checked(object sender, RoutedEventArgs e)
+        {
+            SetDifficulty("Medium");
+        }
+        private void Hard_Checked(object sender, RoutedEventArgs e)
+        {
+            SetDifficulty("Hard");
+        }
+
+        private void Competitive_Checked(object sender, RoutedEventArgs e)
+        {
+            SetGamemode("Competetive");
+        }
+
+        private void Casual_Checked(object sender, RoutedEventArgs e)
+        {
+           SetGamemode("Casual");
+        }
+
+        private void Practice_Checked(object sender, RoutedEventArgs e)
+        {
+            SetGamemode("Practice");
+        }
         private void New_Game_Click(object sender, RoutedEventArgs e)
         {
-            if (easy.IsChecked == true)
-            {
-                difficulty = "Easy";
-            }
-            else if (medium.IsChecked == true)
-            {
-                difficulty = "Medium";
-            }
-            else if (hard.IsChecked == true)
-            {
-                difficulty = "Hard";
-            }
-            
-            if (competitive.IsChecked == true)
-            {
-                gamemode = "Competetive";
-            } else if (casual.IsChecked ==true)
-            {
-                gamemode = "Casual";
-            } else if(practice.IsChecked == true)
-            {
-                gamemode = "Practice";
-            }
 
-            name = getname.Text;
+            //name = getname.Text;
 
             if (name == "" && difficulty == "Unspecified" && gamemode == "Unspecified")
             {
@@ -96,12 +101,42 @@ namespace PTI_Ear_Trainer
             //GameWindow gw = new GameWindow(difficulty,10);
         }
 
+        private void SetDifficulty(string thisdifficulty)
+        {
+            difficulty = thisdifficulty;
+        }
+        private void SetGamemode(string thisgamemode)
+        {
+            gamemode = thisgamemode;
+        }
+        private void SetName(object sender, TextChangedEventArgs e)
+        {
+            name = Getname.Text;
+        }
+        private void NewGame(object sender, RoutedEventArgs e)
+        {
+            this.Hide();
+            MainWindow window = new MainWindow();
+            window.Show();
+        }
+        private void Reset(object sender, RoutedEventArgs e)
+        {
+            Trace.WriteLine("asd");
+        }
         private void Close(object sender, RoutedEventArgs e)
         {
-            Close();
             App.Current.Shutdown();
         }
 
+        private void FontUp(object sender, RoutedEventArgs e)
+        {
+            
+        }
 
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
+            App.Current.Shutdown();
+        }
     }
 }
