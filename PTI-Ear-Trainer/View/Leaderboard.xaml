@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PTI_Ear_Trainer.View"
         mc:Ignorable="d"
-        Title="Leaderboard" Height="450" Width="800">
+        Icon="icon.ico"
+        WindowStartupLocation="CenterScreen"
+        Title="Leaderbaord" Height="400" Width="300" MinHeight="200" MinWidth="300">
     <Grid>
         
     </Grid>

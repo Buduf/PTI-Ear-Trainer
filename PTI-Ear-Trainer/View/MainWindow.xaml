@@ -13,7 +13,7 @@
             <ColumnDefinition Width="450*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="5*"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="115*"/>
         </Grid.RowDefinitions>
         <Menu>
@@ -32,7 +32,7 @@
             </MenuItem>
         </Menu>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="1" Grid.Row="1" Margin="0,100,0,0" >
-            <Button x:Name="New_Game" Content="New Game"   IsDefault="True" Height="60" Width="100" Click="New_Game_Click" Grid.Row="1" Grid.Column="1"/>
+            <Button x:Name="New_Game" Content="New Game" IsDefault="True" Height="60" Width="100" Click="New_Game_Click" Grid.Row="1" Grid.Column="1"/>
             <Button x:Name="Leaderboard" Content="Leaderboard" Margin="0,25,0,0"  Height="25" Width="100" Click="New_Game_Click" Grid.Row="1" Grid.Column="1"/>
         </StackPanel>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Margin="0,172,200,0" >
@@ -42,14 +42,14 @@
         </StackPanel>
         <TextBox x:Name="Getname" Margin="70,80,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" TextChanged="SetName" Grid.Row="1" Grid.Column="1"/>
         <Canvas x:Name="Difficulties" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="1" Margin="0,150,105,0" >
-            <RadioButton x:Name="easy" Content="easy" Canvas.Left="15" GroupName="difficulties" Checked="Easy_Checked"/>
+            <RadioButton x:Name="easy" Content="easy" Canvas.Left="15" GroupName="difficulties" Checked="Easy_Checked" IsChecked="True"/>
             <RadioButton x:Name="medium" Content="medium" Canvas.Left="82" GroupName="difficulties" Checked="Medium_Checked"/>
             <RadioButton x:Name="hard" Content="hard" Canvas.Left="157" GroupName="difficulties" Checked="Hard_Checked"/>
         </Canvas>
         <Canvas x:Name="Game_modes" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Margin="0,255,100,0">
-            <RadioButton x:Name="competitive" Content="ranked" Canvas.Left="10" GroupName="Gamemode" Checked="Competitive_Checked"/>
+            <RadioButton x:Name="practice" Content="practice" Canvas.Left="10" GroupName="Gamemode" Checked="Practice_Checked" IsChecked="True"/>
             <RadioButton x:Name="casual" Content="survival" Canvas.Left="80" GroupName="Gamemode" Checked="Casual_Checked"/>
-            <RadioButton x:Name="practice" Content="practice" Canvas.Left="155" GroupName="Gamemode" Checked="Practice_Checked"/>
+            <RadioButton x:Name="competitive" Content="ranked" Canvas.Left="155" GroupName="Gamemode" Checked="Competitive_Checked"/>
         </Canvas>
     </Grid>
 </Window>

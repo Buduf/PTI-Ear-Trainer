@@ -13,7 +13,7 @@
             <ColumnDefinition Width="450*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="4*"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="10*"/>
             <RowDefinition Height="40*"/>
             <RowDefinition Height="10*"/>
@@ -21,7 +21,7 @@
             <RowDefinition Height="10*"/>
             <RowDefinition Height="5*"/>
         </Grid.RowDefinitions>
-        <Menu>
+        <Menu Grid.Row="0" x:Name="menu">
             <MenuItem Header="File">
                 <MenuItem x:Name="newGame" Header="New game" HorizontalAlignment="Left" Width="190" Click="NewGame"/>
                 <Separator />
@@ -32,9 +32,8 @@
                 <MenuItem x:Name="appExit" Header="Close" HorizontalAlignment="Left" Width="190" Click="Close"/>
             </MenuItem>
             <MenuItem Header="Options">
-                <MenuItem x:Name="windowed" Header="Windowed mode" HorizontalAlignment="Left" Width="180"/>
-                <MenuItem x:Name="bordered" Header="Bordered mode" HorizontalAlignment="Left" Width="180"/>
-                <MenuItem x:Name="fullscreen" Header="Fullscreen" HorizontalAlignment="Left" Width="180"/>
+                <MenuItem x:Name="normal" Header="Windowed mode" HorizontalAlignment="Left" Width="180" IsChecked="True" Click="NormalClick"/>
+                <MenuItem x:Name="maximize" Header="Maximized mode" HorizontalAlignment="Left" Width="180" Click="MaximizeClick"/>
             </MenuItem>
             <MenuItem Header="About">
                 <MenuItem x:Name="tutorial" Header="How to play" HorizontalAlignment="Left" Width="170" Click="OpenHTP"/>

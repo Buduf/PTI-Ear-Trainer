@@ -131,17 +131,20 @@ namespace PTI_Ear_Trainer
 
         private void OpenLeaderboard(object sender, RoutedEventArgs e)
         {
-            
+            Leaderboard window = new Leaderboard();
+            window.Show();
         }
 
         private void OpenAbout(object sender, RoutedEventArgs e)
         {
-
+            About window = new About();
+            window.Show();
         }
 
         private void OpenHTP(object sender, RoutedEventArgs e)
         {
-
+            Howtoplay window = new Howtoplay();
+            window.Show();
         }
 
         protected override void OnClosed(EventArgs e)
