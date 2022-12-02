@@ -44,7 +44,14 @@ jobs:
 
     - name: Execute unit tests
       run: dotnet test -c "${{ matrix.configuration }}" --logger trx --results-directory "TestResults-${{ matrix.configuration }}"
-      
+
+    - name: Lint Code Base
+      uses: github/super-linter@v4
+      env:
+        VALIDATE_ALL_CODEBASE: false
+        DEFAULT_BRANCH: master
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
     - name: Upload build artifacts
       uses: actions/upload-artifact@v3
       with:
