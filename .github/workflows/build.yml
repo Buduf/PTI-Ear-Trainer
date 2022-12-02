@@ -94,6 +94,11 @@ jobs:
           New-Item -Path .\.sonar\scanner -ItemType Directory
           dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
 
+      - name: Install Coverlet as a global dotnet tool
+        shell: powershell
+        run: |
+          dotnet tool install --global coverlet.console
+
       - name: Build and analyze
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
@@ -101,5 +106,10 @@ jobs:
         shell: powershell
         run: |
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"Buduf_PTI-Ear-Trainer" /o:"buduf" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
-          dotnet build -c "Debug"
+          dotnet build --no-incremental -c "Debug"
+          coverlet .\CovExample.Tests\bin\Debug\net6.0\CovExample.Tests.dll
+            --target "dotnet" 
+            --targetargs "test --no-build"
+            -f=opencover 
+            -o="coverage.xml"
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
