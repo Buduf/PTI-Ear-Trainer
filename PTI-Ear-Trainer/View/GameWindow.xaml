@@ -22,19 +22,16 @@
             <RowDefinition Height="5*"/>
         </Grid.RowDefinitions>
         <Menu Grid.Row="0" x:Name="menu">
-            <MenuItem Header="File">
+            <MenuItem Header="Game">
                 <MenuItem x:Name="newGame" Header="New game" HorizontalAlignment="Left" Width="190" Click="NewGame"/>
-                <Separator />
-                <MenuItem x:Name="leaderboard" Header="Leaderboard" HorizontalAlignment="Left" Width="190" Click="OpenLeaderboard"/>
-                <MenuItem x:Name="reset" Header="Reset leaderboard" HorizontalAlignment="Left" Width="190" Click="Reset"/>
-                <Separator />
+                <Separator/>
+                <MenuItem x:Name="normal" Header="Windowed" HorizontalAlignment="Left" Width="180" IsChecked="True" Click="NormalClick"/>
+                <MenuItem x:Name="maximize" Header="Maximized" HorizontalAlignment="Left" Width="180" Click="MaximizeClick"/>
+                <Separator/>
                 <MenuItem x:Name="close" Header="Exit current game" HorizontalAlignment="Left" Width="190" Click="ExitCurrentGame"/>
                 <MenuItem x:Name="appExit" Header="Close" HorizontalAlignment="Left" Width="190" Click="Close"/>
             </MenuItem>
-            <MenuItem Header="Options">
-                <MenuItem x:Name="normal" Header="Windowed mode" HorizontalAlignment="Left" Width="180" IsChecked="True" Click="NormalClick"/>
-                <MenuItem x:Name="maximize" Header="Maximized mode" HorizontalAlignment="Left" Width="180" Click="MaximizeClick"/>
-            </MenuItem>
+            <MenuItem x:Name="leaderboard" Header="Leaderboard" HorizontalAlignment="Left" Click="OpenLeaderboard"/>
             <MenuItem Header="About">
                 <MenuItem x:Name="tutorial" Header="How to play" HorizontalAlignment="Left" Width="170" Click="OpenHTP"/>
                 <Separator/>

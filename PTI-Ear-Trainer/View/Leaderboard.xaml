@@ -7,8 +7,10 @@
         mc:Ignorable="d"
         Icon="icon.ico"
         WindowStartupLocation="CenterScreen"
-        Title="Leaderbaord" Height="400" Width="300" MinHeight="200" MinWidth="300">
+        Title="Leaderbaord" Height="400" Width="300" MinHeight="200" MinWidth="300"
+        ResizeMode="NoResize">
     <Grid>
-        
+        <Button Content="Reset Leaderboard" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,270,0,0" Height="25" Width="110" Click="Reset"/>
+        <Button Content="Close" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,270,40,0" Height="25" Width="50" Click="Close"/>
     </Grid>
 </Window>

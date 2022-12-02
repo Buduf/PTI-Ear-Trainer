@@ -29,7 +29,7 @@ namespace PTI_Ear_Trainer.View
             this.name = name;
             this.difficulty = difficulty;
             this.gamemode = gamemode;
-            Title = "PTI Ear Trainer - " + difficulty;
+            Title = "PTI Ear Trainer | " + difficulty + " - " + gamemode;
             LabelGuessNumber.Content = "1/" + totalGuessNumber;
         }
 
@@ -42,7 +42,6 @@ namespace PTI_Ear_Trainer.View
                     throw new ArgumentNullException();
             }
         }
-
         private void ButtonPlay_Click(object sender, RoutedEventArgs e)
         {
             ButtonPlay.IsEnabled = false;
@@ -50,15 +49,23 @@ namespace PTI_Ear_Trainer.View
         }
         private void NewGame(object sender, RoutedEventArgs e)
         {
-            this.Hide();
-            GameWindow window = new GameWindow(name, difficulty, gamemode, 10);
-            window.Show();
+            MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show("Are you sure you want to start a new game?", "New game", System.Windows.MessageBoxButton.YesNo);
+            if (messageBoxResult == MessageBoxResult.Yes)
+            {
+                this.Hide();
+                GameWindow window = new GameWindow(name, difficulty, gamemode, 10);
+                window.Show();
+            }
         }
         private void ExitCurrentGame(object sender, RoutedEventArgs e)
         {
-            this.Hide();
-            MainWindow window = new MainWindow();
-            window.Show();
+            MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show("Are you sure you want to exit?", "Exit Confirmation", System.Windows.MessageBoxButton.YesNo);
+            if (messageBoxResult == MessageBoxResult.Yes)
+            {
+                this.Hide();
+                MainWindow window = new MainWindow();
+                window.Show();
+            }
         }
         private void Reset(object sender, RoutedEventArgs e)
         {

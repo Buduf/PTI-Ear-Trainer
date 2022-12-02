@@ -30,10 +30,6 @@ namespace PTI_Ear_Trainer
         public MainWindow()
         {
             InitializeComponent();
-            //// For testing!
-            //Hide();
-            //GameWindow window = new GameWindow("Practice mode");
-            //window.Show();
         }
 
         private void Easy_Checked(object sender, RoutedEventArgs e)
@@ -65,9 +61,6 @@ namespace PTI_Ear_Trainer
         }
         private void New_Game_Click(object sender, RoutedEventArgs e)
         {
-
-            //name = getname.Text;
-
             if (name == "" && difficulty == "Unspecified" && gamemode == "Unspecified")
             {
                 MessageBox.Show("PLease choose a nickname, select difficulty and game mode.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -99,7 +92,6 @@ namespace PTI_Ear_Trainer
                 GameWindow window = new GameWindow(name, difficulty, gamemode);
                 window.Show();
             }
-            //GameWindow gw = new GameWindow(difficulty,10);
         }
 
         private void SetDifficulty(string thisdifficulty)
@@ -116,17 +108,17 @@ namespace PTI_Ear_Trainer
         }
         private void NewGame(object sender, RoutedEventArgs e)
         {
-            this.Hide();
-            MainWindow window = new MainWindow();
-            window.Show();
-        }
-        private void Reset(object sender, RoutedEventArgs e)
-        {
-            Trace.WriteLine("asd");
+            MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show("Are you sure you want to start a new game?", "New game", System.Windows.MessageBoxButton.YesNo);
+            if (messageBoxResult == MessageBoxResult.Yes)
+            {
+                this.Hide();
+                MainWindow window = new MainWindow();
+                window.Show();
+            }
         }
         private void Close(object sender, RoutedEventArgs e)
         {
-            App.Current.Shutdown();
+            App.Current.Shutdown();   
         }
 
         private void OpenLeaderboard(object sender, RoutedEventArgs e)

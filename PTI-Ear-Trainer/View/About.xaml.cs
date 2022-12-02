@@ -22,6 +22,12 @@ namespace PTI_Ear_Trainer.View
         public About()
         {
             InitializeComponent();
+            AboutDescprition.Text = "";
+        }
+
+        private void Close(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }
