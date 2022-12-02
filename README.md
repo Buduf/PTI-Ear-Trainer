@@ -1,6 +1,5 @@
 # PTI Ear Trainer
 [![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/summary/new_code?id=Buduf_PTI-Ear-Trainer)
-[![GitHub Super-Linter](https://github.com/Buduf/PTI-Ear-Trainer/workflows/Lint%20Code%20Base/badge.svg)](https://github.com/marketplace/actions/super-linter) [![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=Buduf_PTI-Ear-Trainer)](https://sonarcloud.io/summary/new_code?id=Buduf_PTI-Ear-Trainer)
 
 ## Building from command-line
 
