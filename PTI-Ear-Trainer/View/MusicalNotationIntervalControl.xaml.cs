@@ -141,10 +141,10 @@ namespace PTI_Ear_Trainer.View
         private static readonly Note[] sharpNotes = { Note.LowerASharp, Note.CSharp, Note.DSharp, Note.FSharp, Note.GSharp, Note.ASharp, Note.UpperCSharp, Note.UpperDSharp };
         private void updateSharpSigns()
         {
-                SharpSign1.Visibility = IntervalVisible && sharpNotes.Contains(note1) ?
+            SharpSign1.Visibility = IntervalVisible && sharpNotes.Contains(note1) ?
+            Visibility.Visible : Visibility.Hidden;
+            SharpSign2.Visibility = IntervalVisible && sharpNotes.Contains(note2) ?
                 Visibility.Visible : Visibility.Hidden;
-                SharpSign2.Visibility = IntervalVisible && sharpNotes.Contains(note2) ?
-                    Visibility.Visible : Visibility.Hidden;
         }
     }
 }
