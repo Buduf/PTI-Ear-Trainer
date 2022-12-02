@@ -1,9 +1,9 @@
-﻿using PTI_Ear_Trainer_Model;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using PTI_Ear_Trainer_Model;
 
 namespace PTI_Ear_Trainer.View
 {

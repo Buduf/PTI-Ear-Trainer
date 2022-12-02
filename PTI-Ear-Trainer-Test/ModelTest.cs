@@ -1,4 +1,4 @@
-using PTI_Ear_Trainer_Model;
+﻿using PTI_Ear_Trainer_Model;
 
 namespace PTI_Ear_Trainer_Test
 {
