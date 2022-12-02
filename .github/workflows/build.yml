@@ -61,7 +61,7 @@ jobs:
   analyze:
     name: Analyze with SonarCloud
     needs: [build]
-    if: needs.build.strategy.matrix.configuration == Debug
+    if: needs.build.strategy.matrix.configuration == 'Debug'
 
     runs-on: windows-latest
     steps:
