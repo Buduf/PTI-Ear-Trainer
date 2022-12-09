@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Icon="icon.ico"
         WindowStartupLocation="CenterScreen"
-        Title="Ear-Trainer" Height="500" Width="450" MinHeight="500" MinWidth="450">
+        Title="Ear Trainer" Height="500" Width="450" MinHeight="500" MinWidth="450">
     <Grid x:Name="mainmenu">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="450*"/>
@@ -29,9 +29,8 @@
                 <MenuItem x:Name="about" Header="About" HorizontalAlignment="Left" Width="170" Click="OpenAbout"/>
             </MenuItem>
         </Menu>
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,100,0,0" Grid.Column="1" Grid.Row="1">
-            <Button x:Name="New_Game" Content="New Game" IsDefault="True" Height="60" Width="100" Grid.Row="1" Grid.Column="1" Click="New_Game_Click"/>
-            <Button x:Name="Leaderboard" Content="Leaderboard" Margin="0,25,0,0" Height="25" Width="100" Grid.Row="1" Grid.Column="1" Click="New_Game_Click"/>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,120,0,0" Grid.Column="1" Grid.Row="1">
+            <Button x:Name="New_Game" Content="New Game" IsDefault="True" Height="60" Width="100" Click="New_Game_Click"/>
         </StackPanel>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,172,200,0" Grid.Row="1">
             <Label x:Name="Player_name" Content="Player name:" HorizontalAlignment="Left" FontSize="16" FontWeight="Bold" Margin="0,0,0,0" Width="110" Grid.Row="1" Grid.Column="1"/>

@@ -7,7 +7,7 @@
         Icon="icon.ico"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="PTI Ear Trainer" Height="500" Width="450" MinHeight="500" MinWidth="450">
+        Title="Ear Trainer" Height="500" Width="450" MinHeight="500" MinWidth="450">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="450*"/>
