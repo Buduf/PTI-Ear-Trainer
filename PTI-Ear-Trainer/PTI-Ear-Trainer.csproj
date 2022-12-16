@@ -12,4 +12,28 @@
     <ProjectReference Include="..\PTI-Ear-Trainer-Model\PTI-Ear-Trainer-Model.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Resource Include="Audio\Piano\A.wav" />
+    <Resource Include="Audio\Piano\ASharp.wav" />
+    <Resource Include="Audio\Piano\B.wav" />
+    <Resource Include="Audio\Piano\C.wav" />
+    <Resource Include="Audio\Piano\CSharp.wav" />
+    <Resource Include="Audio\Piano\D.wav" />
+    <Resource Include="Audio\Piano\DSharp.wav" />
+    <Resource Include="Audio\Piano\E.wav" />
+    <Resource Include="Audio\Piano\F.wav" />
+    <Resource Include="Audio\Piano\FSharp.wav" />
+    <Resource Include="Audio\Piano\G.wav" />
+    <Resource Include="Audio\Piano\GSharp.wav" />
+    <Resource Include="Audio\Piano\LowerA.wav" />
+    <Resource Include="Audio\Piano\LowerASharp.wav" />
+    <Resource Include="Audio\Piano\LowerB.wav" />
+    <Resource Include="Audio\Piano\UpperC.wav" />
+    <Resource Include="Audio\Piano\UpperCSharp.wav" />
+    <Resource Include="Audio\Piano\UpperD.wav" />
+    <Resource Include="Audio\Piano\UpperDSharp.wav" />
+    <Resource Include="Audio\Piano\UpperE.wav" />
+    <Resource Include="Audio\Piano\UpperF.wav" />
+  </ItemGroup>
+
 </Project>
