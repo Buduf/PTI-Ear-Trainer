@@ -1,22 +1,13 @@
-name: Continuous Integration
+name: CI
 
 on: [push, pull_request]
 
 jobs:
 
   build:
-    name: Build (${{ matrix.configuration }})
+    name: Build (Debug)
     if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.event.pull_request.base.repo.full_name
-
-    strategy:
-      matrix:
-        configuration: [Debug, Release]
-
     runs-on: windows-latest
-
-    env:
-      Solution_Name: PTI-Ear-Trainer.sln
-      Test_Project_Path: PTI-Ear-Trainer-Test/PTI-Ear-Trainer-Test.csproj
 
     steps:
     - name: Checkout
@@ -32,7 +23,7 @@ jobs:
     - name: Get git short hash
       id: git_short_hash
       shell: bash
-      run: git rev-parse --short "${{ github.sha }}"
+      run: echo "result=$(git rev-parse --short ${{ github.sha })" >> $GITHUB_OUTPUT
 
     - name: Clear
       run: dotnet clean && dotnet nuget locals all --clear
@@ -41,22 +32,22 @@ jobs:
       run: dotnet restore
 
     - name: Build
-      run: dotnet build -o "build/${{ matrix.configuration }}" -c "${{ matrix.configuration }}" /p:SourceRevisionId="${{ steps.git_short_hash.outputs.result }}"
+      run: dotnet build -o build -c Debug /p:SourceRevisionId=${{ steps.git_short_hash.outputs.result }}
 
     - name: Execute unit tests
-      run: dotnet test -c "${{ matrix.configuration }}" --logger trx --results-directory "TestResults-${{ matrix.configuration }}"
+      run: dotnet test -c Debug --logger trx --results-directory "TestResults"
 
     - name: Upload build artifacts
       uses: actions/upload-artifact@v3
       with:
-        name: PTI-Ear-Trainer-${{ matrix.configuration }}+${{ steps.git_short_hash.outputs.result }}
-        path: build/${{ matrix.configuration }}
+        name: PTI-Ear-Trainer+${{ steps.git_short_hash.outputs.result }}
+        path: build
 
     - name: Upload dotnet test results
       uses: actions/upload-artifact@v3
       with:
-        name: TestResults-${{ matrix.configuration }}
-        path: TestResults-${{ matrix.configuration }}
+        name: TestResults
+        path: TestResults
       if: ${{ always() }}
 
   analyze:
@@ -70,9 +61,11 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.11
-      - uses: actions/checkout@v2
+          
+      - name: Checkout
+        uses: actions/checkout@v3
         with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+          fetch-depth: 0
 
       - name: Cache SonarCloud packages
         uses: actions/cache@v1
