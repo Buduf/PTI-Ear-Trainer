@@ -1,0 +1,130 @@
+name: Continuous Integration
+
+on: [push, pull_request]
+
+jobs:
+
+  build:
+    name: Build (${{ matrix.configuration }})
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.event.pull_request.base.repo.full_name
+
+    strategy:
+      matrix:
+        configuration: [Debug, Release]
+
+    runs-on: windows-latest
+
+    env:
+      Solution_Name: PTI-Ear-Trainer.sln
+      Test_Project_Path: PTI-Ear-Trainer-Test/PTI-Ear-Trainer-Test.csproj
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: Install .NET Core
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 6.0.x
+
+    - name: Get git short hash
+      id: git_short_hash
+      shell: bash
+      run: git rev-parse --short "${{ github.sha }}"
+
+    - name: Clear
+      run: dotnet clean && dotnet nuget locals all --clear
+
+    - name: Install dependencies
+      run: dotnet restore
+
+    - name: Build
+      run: dotnet build -o "build/${{ matrix.configuration }}" -c "${{ matrix.configuration }}" /p:SourceRevisionId="${{ steps.git_short_hash.outputs.result }}"
+
+    - name: Execute unit tests
+      run: dotnet test -c "${{ matrix.configuration }}" --logger trx --results-directory "TestResults-${{ matrix.configuration }}"
+
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: PTI-Ear-Trainer-${{ matrix.configuration }}+${{ steps.git_short_hash.outputs.result }}
+        path: build/${{ matrix.configuration }}
+
+    - name: Upload dotnet test results
+      uses: actions/upload-artifact@v3
+      with:
+        name: TestResults-${{ matrix.configuration }}
+        path: TestResults-${{ matrix.configuration }}
+      if: ${{ always() }}
+
+  analyze:
+    name: Analyze with SonarCloud
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.event.pull_request.base.repo.full_name
+    needs: [build]
+
+    runs-on: windows-latest
+    steps:
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.11
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+
+      - name: Cache SonarCloud packages
+        uses: actions/cache@v1
+        with:
+          path: ~\sonar\cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+
+      - name: Cache SonarCloud scanner
+        id: cache-sonar-scanner
+        uses: actions/cache@v1
+        with:
+          path: .\.sonar\scanner
+          key: ${{ runner.os }}-sonar-scanner
+          restore-keys: ${{ runner.os }}-sonar-scanner
+
+      - name: Install SonarCloud scanner
+        if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
+        shell: powershell
+        run: |
+          New-Item -Path .\.sonar\scanner -ItemType Directory
+          dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
+
+      - name: Install Coverlet as a global dotnet tool
+        shell: powershell
+        run: |
+          dotnet tool install --global coverlet.console
+
+      - name: Build and analyze
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        shell: powershell
+        run: |
+          .\.sonar\scanner\dotnet-sonarscanner begin /k:"Buduf_PTI-Ear-Trainer" /o:"buduf" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.opencover.reportsPaths=coverage.xml
+          dotnet build --no-incremental -c "Debug"
+          coverlet .\PTI-Ear-Trainer-Test\bin\Debug\net6.0\PTI-Ear-Trainer-Test.dll --target "dotnet" --targetargs "test --no-build" -f=opencover -o="coverage.xml"
+          .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+
+  lint:
+    name: Lint Code Base
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.event.pull_request.base.repo.full_name
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Lint Code Base
+        uses: github/super-linter@v4
+        env:
+          DEFAULT_BRANCH: master
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

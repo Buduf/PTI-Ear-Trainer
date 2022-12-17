@@ -1,6 +1,7 @@
 # PTI Ear Trainer
+[![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/summary/new_code?id=Buduf_PTI-Ear-Trainer)
 
-## Building from commandline
+## Building from command-line
 
 First clone the repository and install [.NET 6.0 (or higher) SDK](https://dotnet.microsoft.com/download/dotnet/6.0).
 
