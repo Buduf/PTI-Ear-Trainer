@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows;
-using System.Windows.Controls;
 using PTI_Ear_Trainer.View;
+using PTI_Ear_Trainer_Model;
 
 namespace PTI_Ear_Trainer
 {
@@ -10,102 +10,22 @@ namespace PTI_Ear_Trainer
     /// </summary>
     public partial class MainWindow : Window
     {
-        string name = "Unspecified";
-        string difficulty = "Unspecified";
-        string gamemode = "Unspecified";
-        protected int x;
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        private void Easy_Checked(object sender, RoutedEventArgs e)
+        public GameDifficulty GetSelectedDifficulty()
         {
-            SetDifficulty("Easy");
-        }
-        private void Medium_Checked(object sender, RoutedEventArgs e)
-        {
-            SetDifficulty("Medium");
-        }
-        private void Hard_Checked(object sender, RoutedEventArgs e)
-        {
-            SetDifficulty("Hard");
+            if (easy.IsChecked.GetValueOrDefault())
+                return GameDifficulty.EASY;
+            else if (medium.IsChecked.GetValueOrDefault())
+                return GameDifficulty.MEDIUM;
+            else if (hard.IsChecked.GetValueOrDefault())
+                return GameDifficulty.HARD;
+            return GameDifficulty.EASY;
         }
 
-        private void Competitive_Checked(object sender, RoutedEventArgs e)
-        {
-            SetGamemode("Competetive");
-        }
-
-        private void Casual_Checked(object sender, RoutedEventArgs e)
-        {
-            SetGamemode("Casual");
-        }
-
-        private void Practice_Checked(object sender, RoutedEventArgs e)
-        {
-            SetGamemode("Practice");
-        }
-        private void New_Game_Click(object sender, RoutedEventArgs e)
-        {
-            if (name == "" && difficulty == "Unspecified" && gamemode == "Unspecified")
-            {
-                MessageBox.Show("PLease choose a nickname, select difficulty and game mode.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            else if (name != "" && difficulty == "Unspecified" && gamemode != "Unspecified")
-            {
-                MessageBox.Show("Please select difficulty.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            else if (name != "" && difficulty != "Unspecified" && gamemode == "Unspecified")
-            {
-                MessageBox.Show("PLease select game mode.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            else if (name == "" && difficulty == "Unspecified" && gamemode != "Unspecified")
-            {
-                MessageBox.Show("Please choose a nickname and difficulty.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            else if (name == "" && difficulty != "Unspecified" && gamemode == "Unspecified")
-            {
-                MessageBox.Show("PLease choose a nickname and game mode.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            else if (name == "" && difficulty != "Unspecified" && gamemode != "Unspecified")
-            {
-                MessageBox.Show("PLease choose a nickname.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            else if (name != "" && difficulty == "Unspecified" && gamemode == "Unspecified")
-            {
-                MessageBox.Show("PLease select difficulty and game mode.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            else
-            {
-                this.Hide();
-                GameWindow window = new GameWindow(name, difficulty, gamemode);
-                window.Show();
-            }
-        }
-
-        private void SetDifficulty(string thisdifficulty)
-        {
-            difficulty = thisdifficulty;
-        }
-        private void SetGamemode(string thisgamemode)
-        {
-            gamemode = thisgamemode;
-        }
-        private void SetName(object sender, TextChangedEventArgs e)
-        {
-            name = Getname.Text;
-        }
-        private void NewGame(object sender, RoutedEventArgs e)
-        {
-            MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show("Are you sure you want to start a new game?", "New game", System.Windows.MessageBoxButton.YesNo);
-            if (messageBoxResult == MessageBoxResult.Yes)
-            {
-                this.Hide();
-                MainWindow window = new MainWindow();
-                window.Show();
-            }
-        }
         private void Close(object sender, RoutedEventArgs e)
         {
             App.Current.Shutdown();
