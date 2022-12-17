@@ -7,7 +7,7 @@ namespace PTI_Ear_Trainer_Model
     public class EarTrainer
     {
         private Random rng;
-
+        private IntervalPuzzle _intervalPuzzle = null!;
         private readonly N[][] possibleNotes =
         {
             new N[] { N.C },
@@ -16,7 +16,6 @@ namespace PTI_Ear_Trainer_Model
             new N[] { N.LowerA, N.LowerB, N.C, N.D, N.E, N.F },
             new N[] { N.LowerA, N.LowerASharp, N.LowerB, N.C, N.CSharp, N.D, N.DSharp, N.E, N.F }
         };
-
         private readonly I[][] possibleIntervals =
         {
             new I[] { I.P1, I.M2, I.P5, I.P8 },
@@ -28,20 +27,22 @@ namespace PTI_Ear_Trainer_Model
 
         public GameDifficulty Difficulty { get; set; }
 
-        public EarTrainer() : this(GameDifficulty.MEDIUM) { }
+        public event EventHandler<GuessEventArgs>? IntervalGuessed;
 
-        private IntervalPuzzle? _intervalPuzzle;
+        public EarTrainer() : this(GameDifficulty.MEDIUM) { }
 
         public EarTrainer(GameDifficulty difficulty)
         {
             rng = new Random();
             Difficulty = difficulty;
+            NextPuzzle();
         }
 
         public static Interval CountInterval(Note note1, Note note2)
         {
-            if (note2 >= note1) return (Interval)((int)note2 - (int)note1);
-            throw new ArgumentException("First note must be lower than second note!");
+            if (note1 >= note2)
+                throw new ArgumentException("First note must be lower than second note!");
+            return (Interval)((int)note2 - (int)note1);
         }
 
         public static Note CountNote(Note note, Interval interval)
@@ -49,10 +50,15 @@ namespace PTI_Ear_Trainer_Model
             return (Note)((int)note + (int)interval);
         }
 
-        public bool GuessInterval(Interval interval)
+        public void NextPuzzle()
         {
-            if (_intervalPuzzle is null) return false;
-            return interval == _intervalPuzzle.Interval;
+            _intervalPuzzle = new IntervalPuzzle(RandomNote(Difficulty), RandomInterval(Difficulty));
+        }
+
+        public void GuessInterval(Interval interval)
+        {
+            if (_intervalPuzzle is null) return;
+            IntervalGuessed?.Invoke(this, new GuessEventArgs(interval == _intervalPuzzle.Interval, _intervalPuzzle.Note1, _intervalPuzzle.Note2));
         }
 
         private Note RandomNote(GameDifficulty difficulty) =>
@@ -60,8 +66,5 @@ namespace PTI_Ear_Trainer_Model
         
         private Interval RandomInterval(GameDifficulty difficulty) =>
             (Interval)rng.Next(possibleIntervals[(int)difficulty].Length);
-
-        private IntervalPuzzle GenerateInterval() => 
-            new IntervalPuzzle(RandomNote(Difficulty), RandomInterval(Difficulty));
     }
 }
