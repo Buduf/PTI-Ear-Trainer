@@ -10,16 +10,9 @@ namespace PTI_Ear_Trainer.View
     /// </summary>
     public partial class GameWindow : Window
     {
-        string name;
-        string difficulty;
-        string gamemode;
-        public GameWindow(string name, string difficulty, string gamemode, int totalGuessNumber = 10)
+        public GameWindow(int totalGuessNumber = 10)
         {
             InitializeComponent();
-            this.name = name;
-            this.difficulty = difficulty;
-            this.gamemode = gamemode;
-            Title = "PTI Ear Trainer | " + difficulty + " - " + gamemode;
             LabelGuessNumber.Content = "1/" + totalGuessNumber;
         }
 
@@ -37,29 +30,9 @@ namespace PTI_Ear_Trainer.View
             ButtonPlay.IsEnabled = false;
             ButtonPlay.Foreground = Brushes.Gray;
         }
-        private void NewGame(object sender, RoutedEventArgs e)
+        private void NewGame_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show("Are you sure you want to start a new game?", "New game", System.Windows.MessageBoxButton.YesNo);
-            if (messageBoxResult == MessageBoxResult.Yes)
-            {
-                this.Hide();
-                GameWindow window = new GameWindow(name, difficulty, gamemode, 10);
-                window.Show();
-            }
-        }
-        private void ExitCurrentGame(object sender, RoutedEventArgs e)
-        {
-            MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show("Are you sure you want to exit?", "Exit Confirmation", System.Windows.MessageBoxButton.YesNo);
-            if (messageBoxResult == MessageBoxResult.Yes)
-            {
-                this.Hide();
-                MainWindow window = new MainWindow();
-                window.Show();
-            }
-        }
-        private void Reset(object sender, RoutedEventArgs e)
-        {
-
+            // TODO
         }
         private void Close(object sender, RoutedEventArgs e)
         {

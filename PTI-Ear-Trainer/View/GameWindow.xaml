@@ -23,12 +23,12 @@
         </Grid.RowDefinitions>
         <Menu Grid.Row="0" x:Name="menu">
             <MenuItem Header="Game">
-                <MenuItem x:Name="newGame" Header="New game" HorizontalAlignment="Left" Width="190" Click="NewGame"/>
+                <MenuItem x:Name="newGame" Header="New game" HorizontalAlignment="Left" Width="190" Click="NewGame_Click"/>
                 <Separator/>
                 <MenuItem x:Name="normal" Header="Windowed" HorizontalAlignment="Left" Width="180" IsChecked="True" Click="NormalClick"/>
                 <MenuItem x:Name="maximize" Header="Maximized" HorizontalAlignment="Left" Width="180" Click="MaximizeClick"/>
                 <Separator/>
-                <MenuItem x:Name="close" Header="Exit current game" HorizontalAlignment="Left" Width="190" Click="ExitCurrentGame"/>
+                <MenuItem x:Name="MenuItemExitCurrentGame" Header="Exit current game" HorizontalAlignment="Left" Width="190"/>
                 <MenuItem x:Name="appExit" Header="Close" HorizontalAlignment="Left" Width="190" Click="Close"/>
             </MenuItem>
             <MenuItem x:Name="leaderboard" Header="Leaderboard" HorizontalAlignment="Left" Click="OpenLeaderboard"/>
