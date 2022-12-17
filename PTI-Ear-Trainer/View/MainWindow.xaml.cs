@@ -1,4 +1,7 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
+using System.Windows.Controls;
+using PTI_Ear_Trainer.View;
 
 namespace PTI_Ear_Trainer
 {
