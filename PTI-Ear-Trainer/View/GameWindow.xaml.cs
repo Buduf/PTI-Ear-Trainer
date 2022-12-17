@@ -81,8 +81,8 @@ namespace PTI_Ear_Trainer.View
                     maximize.IsChecked = false;
                     break;
                 case WindowState.Maximized:
-                    normal.IsChecked= false;
-                    maximize.IsChecked= true;
+                    normal.IsChecked = false;
+                    maximize.IsChecked = true;
                     break;
             }
         }
