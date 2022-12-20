@@ -9,7 +9,7 @@
 
         public Interval Interval
         {
-            get{ return _interval; }
+            get { return _interval; }
             private set { _interval = value; }
         }
 
