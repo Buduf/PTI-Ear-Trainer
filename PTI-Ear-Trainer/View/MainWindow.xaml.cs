@@ -1,18 +1,7 @@
-﻿using PTI_Ear_Trainer.View;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using PTI_Ear_Trainer.View;
+using PTI_Ear_Trainer_Model;
 
 namespace PTI_Ear_Trainer
 {
@@ -24,19 +13,46 @@ namespace PTI_Ear_Trainer
         public MainWindow()
         {
             InitializeComponent();
-            //// For testing!
-            //Hide();
-            //GameWindow window = new GameWindow("Practice mode");
-            //window.Show();
         }
 
-        private void New_Game_Click(object sender, RoutedEventArgs e)
+        public GameDifficulty GetSelectedDifficulty()
         {
-
+            if (easy.IsChecked.GetValueOrDefault())
+                return GameDifficulty.EASY;
+            else if (medium.IsChecked.GetValueOrDefault())
+                return GameDifficulty.MEDIUM;
+            else if (hard.IsChecked.GetValueOrDefault())
+                return GameDifficulty.HARD;
+            return GameDifficulty.EASY;
         }
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
 
+        private void Close(object sender, RoutedEventArgs e)
+        {
+            App.Current.Shutdown();
+        }
+
+        private void OpenLeaderboard(object sender, RoutedEventArgs e)
+        {
+            Leaderboard window = new Leaderboard();
+            window.Show();
+        }
+
+        private void OpenAbout(object sender, RoutedEventArgs e)
+        {
+            About window = new About();
+            window.Show();
+        }
+
+        private void OpenHTP(object sender, RoutedEventArgs e)
+        {
+            Howtoplay window = new Howtoplay();
+            window.Show();
+        }
+
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
+            App.Current.Shutdown();
         }
     }
 }
