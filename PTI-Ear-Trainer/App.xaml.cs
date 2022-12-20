@@ -1,4 +1,4 @@
-using System.Windows;
+﻿using System.Windows;
 using PTI_Ear_Trainer.View;
 using PTI_Ear_Trainer_Model;
 
