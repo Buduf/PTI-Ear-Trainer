@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PTI_Ear_Trainer_Model
+﻿namespace PTI_Ear_Trainer_Model
 {
     public class IntervalPuzzle
     {
@@ -13,11 +7,24 @@ namespace PTI_Ear_Trainer_Model
 
         private Interval _interval;
 
+        public Interval Interval
+        {
+            get { return _interval; }
+            private set { _interval = value; }
+        }
+
         public IntervalPuzzle(Note lowerNote, Note higherNote)
         {
             this.Note1 = lowerNote;
             this.Note2 = higherNote;
             this.SetInterval(this.Note1, this.Note2);
+        }
+
+        public IntervalPuzzle(Note note, Interval interval)
+        {
+            Note1 = note;
+            Note2 = EarTrainer.CountNote(note, interval);
+            _interval = interval;
         }
 
         public Interval GetInterval()
