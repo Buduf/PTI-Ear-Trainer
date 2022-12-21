@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media;
 
 namespace PTI_Ear_Trainer.View
 {
@@ -10,40 +8,28 @@ namespace PTI_Ear_Trainer.View
     /// </summary>
     public partial class GameWindow : Window
     {
-        public GameWindow(int totalGuessNumber = 10)
+        public GameWindow()
         {
             InitializeComponent();
-            LabelGuessNumber.Content = "1/" + totalGuessNumber;
         }
 
-        private void ButtonInterval_Click(object sender, RoutedEventArgs e)
-        {
-            Button? buttonInterval = sender as Button;
-            switch (buttonInterval?.Content.ToString())
-            {
-                case null:
-                    throw new ArgumentNullException();
-            }
-        }
-        private void ButtonPlay_Click(object sender, RoutedEventArgs e)
-        {
-            ButtonPlay.IsEnabled = false;
-            ButtonPlay.Foreground = Brushes.Gray;
-        }
         private void NewGame_Click(object sender, RoutedEventArgs e)
         {
             // TODO
         }
+
         private void Close(object sender, RoutedEventArgs e)
         {
             Close();
             App.Current.Shutdown();
         }
+
         protected override void OnClosed(EventArgs e)
         {
             base.OnClosed(e);
             App.Current.Shutdown();
         }
+
         protected override void OnStateChanged(EventArgs e)
         {
             base.OnStateChanged(e);
@@ -59,6 +45,7 @@ namespace PTI_Ear_Trainer.View
                     break;
             }
         }
+
         private void OpenLeaderboard(object sender, RoutedEventArgs e)
         {
             Leaderboard window = new Leaderboard();

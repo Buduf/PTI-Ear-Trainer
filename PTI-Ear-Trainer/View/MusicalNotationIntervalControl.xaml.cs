@@ -12,11 +12,39 @@ namespace PTI_Ear_Trainer.View
     /// </summary>
     public partial class MusicalNotationIntervalControl : UserControl
     {
+        public static readonly DependencyProperty Note1Property =
+            DependencyProperty.Register(
+                name: nameof(Note1),
+                propertyType: typeof(Note),
+                ownerType: typeof(MusicalNotationIntervalControl),
+                typeMetadata: new FrameworkPropertyMetadata(defaultValue: Note.C));
+
+        public static readonly DependencyProperty Note2Property =
+            DependencyProperty.Register(
+                name: nameof(Note2),
+                propertyType: typeof(Note),
+                ownerType: typeof(MusicalNotationIntervalControl),
+                typeMetadata: new FrameworkPropertyMetadata(defaultValue: Note.C));
+
+        public static readonly DependencyProperty IntervalVisibleProperty =
+            DependencyProperty.Register(
+                name: nameof(IntervalVisible),
+                propertyType: typeof(bool),
+                ownerType: typeof(MusicalNotationIntervalControl),
+                typeMetadata: new FrameworkPropertyMetadata(defaultValue: true));
+
+        public static readonly DependencyProperty IntervalNameProperty =
+            DependencyProperty.Register(
+                name: nameof(IntervalName),
+                propertyType: typeof(string),
+                ownerType: typeof(MusicalNotationIntervalControl),
+                typeMetadata: new FrameworkPropertyMetadata(defaultValue: "Perfect Unison"));
+
         private const int LINEGAP = 15;
         private bool intervalVisible;
         private Note note1;
         private Note note2;
-
+        
         public MusicalNotationIntervalControl()
         {
             InitializeComponent();

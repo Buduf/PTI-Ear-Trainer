@@ -27,6 +27,8 @@ namespace PTI_Ear_Trainer.ViewModel
         [ObservableProperty]
         private bool isGuessed, isCorrect;
 
+        public int TotalPuzzleCount { get => EarTrainer.TotalPuzzleCount; }
+        public int PuzzleNumber { get => model.PuzzleNumber; }
         public ObservableCollection<IntervalInfo> PossibleIntervals { get; private set; } = new ObservableCollection<IntervalInfo>();
 
         public PuzzleViewModel(EarTrainer model, Instrument instrument = Instrument.Piano)
@@ -51,6 +53,10 @@ namespace PTI_Ear_Trainer.ViewModel
 
         partial void OnIsGuessedChanged(bool value)
         {
+            foreach (IntervalInfo info in PossibleIntervals)
+            {
+                info.GuessIntervalCommand.NotifyCanExecuteChanged();
+            }
             GuessIntervalCommand.NotifyCanExecuteChanged();
         }
 
@@ -58,11 +64,17 @@ namespace PTI_Ear_Trainer.ViewModel
         private async Task PlaySounds()
         {
             await Task.WhenAll(Task.Run(() => sound1.LoadAsync()), Task.Run(() => sound2.LoadAsync()));
-            sound1.PlaySync();
-            sound2.PlaySync();
+            await Task.Run(() =>
+            {
+                sound1.PlaySync();
+                sound2.PlaySync();
+            });
+            sound1.Stream.Position = 0;
+            sound2.Stream.Position = 0;
         }
 
-        [RelayCommand(CanExecute = nameof(canGuess))]
+        private bool justTrue() => true;
+        [RelayCommand(CanExecute = nameof(justTrue))]
         private void GuessInterval(Interval interval)
         {
             model.GuessInterval(interval);
@@ -70,9 +82,13 @@ namespace PTI_Ear_Trainer.ViewModel
 
         private void NextPuzzle()
         {
+            Note1 = model.IntervalPuzzle.Note1;
+            Note2 = model.IntervalPuzzle.Note2;
             IsGuessed = false;
-            LoadSound(sound1, note1);
-            LoadSound(sound2, note2);
+            IsGuessed = true;
+            LoadSound(sound1, Note1);
+            LoadSound(sound2, Note2);
+            PlaySoundsCommand.ExecuteAsync(null);
         }
 
         private void OnIntervalGuessed(object? sender, GuessEventArgs e)

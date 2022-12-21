@@ -7,7 +7,7 @@ namespace PTI_Ear_Trainer_Model
     public class EarTrainer
     {
         private Random rng;
-        private IntervalPuzzle _intervalPuzzle = null!;
+
         public static readonly N[][] PossibleNotes =
         {
             new N[] { N.LowerA, N.C, N.E },
@@ -20,8 +20,9 @@ namespace PTI_Ear_Trainer_Model
             new I[] { I.P1, I.m2, I.M2, I.m3, I.M3, I.P4, I.P5, I.M6, I.M7, I.P8 },
             new I[] { I.P1, I.m2, I.M2, I.m3, I.M3, I.P4, I.P5, I.m6, I.M6, I.m7, I.M7, I.P8 }
         };
-
         public static readonly int TotalPuzzleCount = 10;
+
+        public IntervalPuzzle IntervalPuzzle { get; private set; } = null!;
         public GameDifficulty Difficulty { get; set; }
         public int PuzzleNumber { get; private set; }
         public int CorrecGuesses { get; private set; }
@@ -54,7 +55,7 @@ namespace PTI_Ear_Trainer_Model
         {
             if (PuzzleNumber < TotalPuzzleCount)
             {
-                _intervalPuzzle = new IntervalPuzzle(RandomNote(Difficulty), RandomInterval(Difficulty));
+                IntervalPuzzle = new IntervalPuzzle(RandomNote(Difficulty), RandomInterval(Difficulty));
                 PuzzleNumber++;
             }
             else
@@ -65,10 +66,10 @@ namespace PTI_Ear_Trainer_Model
 
         public void GuessInterval(Interval interval)
         {
-            bool correct = interval == _intervalPuzzle.Interval;
+            bool correct = interval == IntervalPuzzle.Interval;
             if (correct)
                 CorrecGuesses++;
-            IntervalGuessed?.Invoke(this, new GuessEventArgs(correct, _intervalPuzzle.Note1, _intervalPuzzle.Note2));
+            IntervalGuessed?.Invoke(this, new GuessEventArgs(correct, IntervalPuzzle.Note1, IntervalPuzzle.Note2));
         }
 
         private Note RandomNote(GameDifficulty difficulty) =>
