@@ -8,13 +8,13 @@ namespace PTI_Ear_Trainer_Model
     {
         private Random rng;
         private IntervalPuzzle _intervalPuzzle = null!;
-        private readonly N[][] possibleNotes =
+        public static readonly N[][] PossibleNotes =
         {
             new N[] { N.LowerA, N.C, N.E },
             new N[] { N.LowerA, N.LowerB, N.C, N.D, N.E, N.F },
             new N[] { N.LowerA, N.LowerASharp, N.LowerB, N.C, N.CSharp, N.D, N.DSharp, N.E, N.F }
         };
-        private readonly I[][] possibleIntervals =
+        public static readonly I[][] PossibleIntervals =
         {
             new I[] { I.P1, I.M2, I.M3, I.P4, I.P5, I.P8 },
             new I[] { I.P1, I.m2, I.M2, I.m3, I.M3, I.P4, I.P5, I.M6, I.M7, I.P8 },
@@ -72,9 +72,9 @@ namespace PTI_Ear_Trainer_Model
         }
 
         private Note RandomNote(GameDifficulty difficulty) =>
-            (Note)rng.Next(possibleNotes[(int)difficulty].Length);
+            (Note)rng.Next(PossibleNotes[(int)difficulty].Length);
 
         private Interval RandomInterval(GameDifficulty difficulty) =>
-            (Interval)rng.Next(possibleIntervals[(int)difficulty].Length);
+            (Interval)rng.Next(PossibleIntervals[(int)difficulty].Length);
     }
 }
