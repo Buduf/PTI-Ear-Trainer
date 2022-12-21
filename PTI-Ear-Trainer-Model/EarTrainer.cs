@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using I = PTI_Ear_Trainer_Model.Interval;
 using N = PTI_Ear_Trainer_Model.Note;
 
@@ -7,6 +8,8 @@ namespace PTI_Ear_Trainer_Model
     public class EarTrainer
     {
         private Random rng;
+
+        public DateTime StartTime { get; private set; }
 
         public static readonly N[][] PossibleNotes =
         {
@@ -25,7 +28,7 @@ namespace PTI_Ear_Trainer_Model
         public IntervalPuzzle IntervalPuzzle { get; private set; } = null!;
         public GameDifficulty Difficulty { get; set; }
         public int PuzzleNumber { get; private set; }
-        public int CorrecGuesses { get; private set; }
+        public int CorrectGuesses { get; private set; }
 
         public event EventHandler<GuessEventArgs>? IntervalGuessed;
         public event EventHandler? EarTrainerEnded;
@@ -34,6 +37,7 @@ namespace PTI_Ear_Trainer_Model
 
         public EarTrainer(GameDifficulty difficulty)
         {
+            StartTime = DateTime.Now;
             rng = new Random();
             Difficulty = difficulty;
             NextPuzzle();
@@ -68,7 +72,7 @@ namespace PTI_Ear_Trainer_Model
         {
             bool correct = interval == IntervalPuzzle.Interval;
             if (correct)
-                CorrecGuesses++;
+                CorrectGuesses++;
             IntervalGuessed?.Invoke(this, new GuessEventArgs(correct, IntervalPuzzle.Note1, IntervalPuzzle.Note2));
         }
 

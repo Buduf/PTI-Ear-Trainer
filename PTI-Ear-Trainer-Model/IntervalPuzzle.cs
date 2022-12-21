@@ -1,4 +1,6 @@
-﻿namespace PTI_Ear_Trainer_Model
+﻿using System;
+
+namespace PTI_Ear_Trainer_Model
 {
     public class IntervalPuzzle
     {

@@ -5,8 +5,10 @@ using System.IO;
 using System.Linq;
 using System.Media;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using PTI_Ear_Trainer_Model;
@@ -20,6 +22,8 @@ namespace PTI_Ear_Trainer.ViewModel
         private SoundPlayer sound1 = new SoundPlayer();
         private SoundPlayer sound2 = new SoundPlayer();
 
+        DispatcherTimer timer;
+
         [ObservableProperty]
         private Note note1, note2;
         [ObservableProperty]
@@ -27,12 +31,19 @@ namespace PTI_Ear_Trainer.ViewModel
         [ObservableProperty]
         private bool isGuessed, isCorrect;
 
+        [ObservableProperty]
+        private string time = "0:00:00";
+
         public int TotalPuzzleCount { get => EarTrainer.TotalPuzzleCount; }
         public int PuzzleNumber { get => model.PuzzleNumber; }
         public ObservableCollection<IntervalInfo> PossibleIntervals { get; private set; } = new ObservableCollection<IntervalInfo>();
 
         public PuzzleViewModel(EarTrainer model, Instrument instrument = Instrument.Piano)
         {
+            timer = new();
+            timer.Interval = TimeSpan.FromSeconds(1);
+            timer.Tick += Timer_Tick;
+            timer.Start();
             this.model = model;
             this.instrument = instrument;
             model.IntervalGuessed += OnIntervalGuessed;
@@ -41,6 +52,11 @@ namespace PTI_Ear_Trainer.ViewModel
                 PossibleIntervals.Add(new IntervalInfo(model, item));
             }
             NextPuzzle();
+        }
+
+        private void Timer_Tick(object? sender, EventArgs e)
+        {
+            Time = TimeSpan.FromSeconds((DateTime.Now - model.StartTime).Seconds).ToString("g");
         }
 
         private void LoadSound(SoundPlayer sound, Note note)
