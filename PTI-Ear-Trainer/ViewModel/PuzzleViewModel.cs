@@ -67,7 +67,6 @@ namespace PTI_Ear_Trainer.ViewModel
             Note1 = model.IntervalPuzzle.Note1;
             Note2 = model.IntervalPuzzle.Note2;
             IsGuessed = false;
-            IsGuessed = true;
             LoadSound(sound1, Note1);
             LoadSound(sound2, Note2);
             PlaySoundsCommand.ExecuteAsync(null);
@@ -77,7 +76,7 @@ namespace PTI_Ear_Trainer.ViewModel
         {
             Note1 = e.CorrectNote1;
             Note2 = e.CorrectNote2;
-            Interval = EarTrainer.CountInterval(note1, note2);
+            Interval = EarTrainer.CountInterval(Note1, Note2);
             IsGuessed = true;
         }
     }

@@ -12,7 +12,7 @@ namespace PTI_Ear_Trainer_Model
         {
             IsCorrect = isCorrect;
             CorrectNote1 = correctNote1;
-            CorrectNote1 = correctNote2;
+            CorrectNote2 = correctNote2;
         }
     }
 }
