@@ -21,6 +21,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="View\icon.ico" />
+    <Resource Include="View\logo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Audio\Piano\A.wav" />
     <Resource Include="Audio\Piano\ASharp.wav" />
     <Resource Include="Audio\Piano\B.wav" />

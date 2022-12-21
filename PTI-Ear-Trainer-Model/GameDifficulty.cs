@@ -2,10 +2,8 @@
 {
     public enum GameDifficulty
     {
-        VERYEASY,
         EASY,
         MEDIUM,
-        HARD,
-        VERYHARD
+        HARD
     }
 }
