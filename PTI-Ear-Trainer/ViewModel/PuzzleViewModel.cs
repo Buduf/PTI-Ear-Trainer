@@ -38,7 +38,7 @@ namespace PTI_Ear_Trainer.ViewModel
             model.IntervalGuessed += OnIntervalGuessed;
             foreach (Interval item in EarTrainer.PossibleIntervals[(int)model.Difficulty])
             {
-                PossibleIntervals.Add(new IntervalInfo(GuessIntervalCommand, item));
+                PossibleIntervals.Add(new IntervalInfo(model, item));
             }
             NextPuzzle();
         }
@@ -47,17 +47,6 @@ namespace PTI_Ear_Trainer.ViewModel
         {
             Uri uri = new Uri($"/Audio/{instrument}/{note}.wav", UriKind.Relative);
             sound.Stream = Application.GetResourceStream(uri).Stream;
-        }
-
-        private bool canGuess() => !isGuessed;
-
-        partial void OnIsGuessedChanged(bool value)
-        {
-            foreach (IntervalInfo info in PossibleIntervals)
-            {
-                info.GuessIntervalCommand.NotifyCanExecuteChanged();
-            }
-            GuessIntervalCommand.NotifyCanExecuteChanged();
         }
 
         [RelayCommand(AllowConcurrentExecutions = false)]
@@ -71,13 +60,6 @@ namespace PTI_Ear_Trainer.ViewModel
             });
             sound1.Stream.Position = 0;
             sound2.Stream.Position = 0;
-        }
-
-        private bool justTrue() => true;
-        [RelayCommand(CanExecute = nameof(justTrue))]
-        private void GuessInterval(Interval interval)
-        {
-            model.GuessInterval(interval);
         }
 
         private void NextPuzzle()

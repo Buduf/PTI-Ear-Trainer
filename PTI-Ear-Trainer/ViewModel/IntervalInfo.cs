@@ -4,16 +4,23 @@ using PTI_Ear_Trainer_Model;
 
 namespace PTI_Ear_Trainer.ViewModel
 {
-    public class IntervalInfo : ObservableObject
+    public partial class IntervalInfo : ObservableObject
     {
-        public IRelayCommand GuessIntervalCommand { get; private set; }
+        private EarTrainer model;
+
         public Interval Interval { get; private set; }
         public string IntervalShortName { get => Interval.ToString(); }
 
-        public IntervalInfo(IRelayCommand guessIntervalCommand, Interval interval)
+        public IntervalInfo(EarTrainer model, Interval interval)
         {
-            GuessIntervalCommand = guessIntervalCommand;
+            this.model = model;
             Interval = interval;
+        }
+
+        [RelayCommand]
+        private void GuessInterval()
+        {
+            model.GuessInterval(Interval);
         }
     }
 }

@@ -7,7 +7,7 @@
         Icon="icon.ico"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="Ear Trainer" Height="500" Width="450" MinHeight="500" MinWidth="450">
+        Name="global" Title="Ear Trainer" Height="500" Width="450" MinHeight="500" MinWidth="450">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="450*"/>
@@ -54,7 +54,7 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Button Content="{Binding IntervalShortName}" Command="{Binding GuessIntervalCommand}" CommandParameter="{Binding Interval}" IsEnabled="True" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30" FontWeight="Bold"/>
+                    <Button Content="{Binding IntervalShortName}" Command="{Binding GuessIntervalCommand}" IsEnabled="True" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30" FontWeight="Bold"/>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
