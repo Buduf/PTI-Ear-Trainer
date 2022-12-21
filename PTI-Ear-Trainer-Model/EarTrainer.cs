@@ -45,7 +45,7 @@ namespace PTI_Ear_Trainer_Model
 
         public static Interval CountInterval(Note note1, Note note2)
         {
-            if (note1 >= note2)
+            if (note1 > note2)
                 throw new ArgumentException("First note must be lower than second note!");
             return (Interval)((int)note2 - (int)note1);
         }

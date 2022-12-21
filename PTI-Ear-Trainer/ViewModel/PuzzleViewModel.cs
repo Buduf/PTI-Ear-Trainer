@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
 using System.Media;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
@@ -36,6 +31,25 @@ namespace PTI_Ear_Trainer.ViewModel
 
         public int TotalPuzzleCount { get => EarTrainer.TotalPuzzleCount; }
         public int PuzzleNumber { get => model.PuzzleNumber; }
+        public string IntervalName
+        {
+            get => model.IntervalPuzzle.Interval switch
+                {
+                    Interval.P1 => "Perfect Unison",
+                    Interval.m2 => "Minor Second",
+                    Interval.M2 => "Major Second",
+                    Interval.m3 => "Minor Third",
+                    Interval.M3 => "Major Third",
+                    Interval.P4 => "Perfect Fourth",
+                    Interval.P5 => "Perfect Fifth",
+                    Interval.m6 => "Minor Sixth",
+                    Interval.M6 => "Major Sixth",
+                    Interval.m7 => "Minor Seventh",
+                    Interval.M7 => "Major Seventh",
+                    Interval.P8 => "Perfect Octave",
+                    _ => string.Empty,
+                };
+        }
         public ObservableCollection<IntervalInfo> PossibleIntervals { get; private set; } = new ObservableCollection<IntervalInfo>();
 
         public PuzzleViewModel(EarTrainer model, Instrument instrument = Instrument.Piano)
@@ -93,6 +107,7 @@ namespace PTI_Ear_Trainer.ViewModel
             Note1 = e.CorrectNote1;
             Note2 = e.CorrectNote2;
             Interval = EarTrainer.CountInterval(Note1, Note2);
+            OnPropertyChanged(nameof(IntervalName));
             IsGuessed = true;
         }
     }
