@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading;
 using I = PTI_Ear_Trainer_Model.Interval;
 using N = PTI_Ear_Trainer_Model.Note;
 
@@ -20,8 +19,8 @@ namespace PTI_Ear_Trainer_Model
         public static readonly I[][] PossibleIntervals =
         {
             new I[] { I.P1, I.M2, I.M3, I.P4, I.P5, I.P8 },
-            new I[] { I.P1, I.m2, I.M2, I.m3, I.M3, I.P4, I.P5, I.M6, I.M7, I.P8 },
-            new I[] { I.P1, I.m2, I.M2, I.m3, I.M3, I.P4, I.P5, I.m6, I.M6, I.m7, I.M7, I.P8 }
+            new I[] { I.m2, I.M2, I.m3, I.M3, I.P4, I.P5, I.M6, I.M7, I.P8 },
+            new I[] { I.m2, I.M2, I.m3, I.M3, I.P4, I.P5, I.m6, I.M6, I.m7, I.M7, I.P8 }
         };
         public static readonly int TotalPuzzleCount = 10;
 
@@ -40,7 +39,6 @@ namespace PTI_Ear_Trainer_Model
             StartTime = DateTime.Now;
             rng = new Random();
             Difficulty = difficulty;
-            NextPuzzle();
         }
 
         public static Interval CountInterval(Note note1, Note note2)
@@ -57,10 +55,9 @@ namespace PTI_Ear_Trainer_Model
 
         public void NextPuzzle()
         {
-            if (PuzzleNumber < TotalPuzzleCount)
+            if (++PuzzleNumber < TotalPuzzleCount)
             {
                 IntervalPuzzle = new IntervalPuzzle(RandomNote(Difficulty), RandomInterval(Difficulty));
-                PuzzleNumber++;
             }
             else
             {
@@ -77,9 +74,9 @@ namespace PTI_Ear_Trainer_Model
         }
 
         private Note RandomNote(GameDifficulty difficulty) =>
-            (Note)rng.Next(PossibleNotes[(int)difficulty].Length);
+            PossibleNotes[(int)difficulty][rng.Next(PossibleNotes[(int)difficulty].Length)];
 
         private Interval RandomInterval(GameDifficulty difficulty) =>
-            (Interval)rng.Next(PossibleIntervals[(int)difficulty].Length);
+            PossibleIntervals[(int)difficulty][rng.Next(PossibleIntervals[(int)difficulty].Length)];
     }
 }

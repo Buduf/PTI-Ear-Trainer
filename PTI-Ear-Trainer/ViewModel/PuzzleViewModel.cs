@@ -17,7 +17,8 @@ namespace PTI_Ear_Trainer.ViewModel
         private SoundPlayer sound1 = new SoundPlayer();
         private SoundPlayer sound2 = new SoundPlayer();
 
-        DispatcherTimer timer;
+        private DispatcherTimer timer;
+        private bool ended = false;
 
         [ObservableProperty]
         private Note note1, note2;
@@ -34,21 +35,21 @@ namespace PTI_Ear_Trainer.ViewModel
         public string IntervalName
         {
             get => model.IntervalPuzzle.Interval switch
-                {
-                    Interval.P1 => "Perfect Unison",
-                    Interval.m2 => "Minor Second",
-                    Interval.M2 => "Major Second",
-                    Interval.m3 => "Minor Third",
-                    Interval.M3 => "Major Third",
-                    Interval.P4 => "Perfect Fourth",
-                    Interval.P5 => "Perfect Fifth",
-                    Interval.m6 => "Minor Sixth",
-                    Interval.M6 => "Major Sixth",
-                    Interval.m7 => "Minor Seventh",
-                    Interval.M7 => "Major Seventh",
-                    Interval.P8 => "Perfect Octave",
-                    _ => string.Empty,
-                };
+            {
+                Interval.P1 => "Perfect Unison",
+                Interval.m2 => "Minor Second",
+                Interval.M2 => "Major Second",
+                Interval.m3 => "Minor Third",
+                Interval.M3 => "Major Third",
+                Interval.P4 => "Perfect Fourth",
+                Interval.P5 => "Perfect Fifth",
+                Interval.m6 => "Minor Sixth",
+                Interval.M6 => "Major Sixth",
+                Interval.m7 => "Minor Seventh",
+                Interval.M7 => "Major Seventh",
+                Interval.P8 => "Perfect Octave",
+                _ => string.Empty,
+            };
         }
         public ObservableCollection<IntervalInfo> PossibleIntervals { get; private set; } = new ObservableCollection<IntervalInfo>();
 
@@ -61,12 +62,15 @@ namespace PTI_Ear_Trainer.ViewModel
             this.model = model;
             this.instrument = instrument;
             model.IntervalGuessed += OnIntervalGuessed;
+            model.EarTrainerEnded += (_, _) => ended = true;
             foreach (Interval item in EarTrainer.PossibleIntervals[(int)model.Difficulty])
             {
                 PossibleIntervals.Add(new IntervalInfo(model, item));
             }
             NextPuzzle();
         }
+
+        public event EventHandler? EarTrainerEnded;
 
         private void Timer_Tick(object? sender, EventArgs e)
         {
@@ -92,20 +96,29 @@ namespace PTI_Ear_Trainer.ViewModel
             sound2.Stream.Position = 0;
         }
 
+        [RelayCommand]
         private void NextPuzzle()
         {
-            Note1 = model.IntervalPuzzle.Note1;
-            Note2 = model.IntervalPuzzle.Note2;
-            IsGuessed = false;
-            LoadSound(sound1, Note1);
-            LoadSound(sound2, Note2);
-            PlaySoundsCommand.ExecuteAsync(null);
+            if (!ended)
+            {
+                model.NextPuzzle();
+                Note1 = model.IntervalPuzzle.Note1;
+                Note2 = model.IntervalPuzzle.Note2;
+                IsGuessed = false;
+                OnPropertyChanged(nameof(PuzzleNumber));
+                LoadSound(sound1, Note1);
+                LoadSound(sound2, Note2);
+                PlaySoundsCommand.ExecuteAsync(null);
+            }
+            else
+            {
+                EarTrainerEnded?.Invoke(this, EventArgs.Empty);
+            }
         }
 
         private void OnIntervalGuessed(object? sender, GuessEventArgs e)
         {
-            Note1 = e.CorrectNote1;
-            Note2 = e.CorrectNote2;
+            IsCorrect = e.IsCorrect;
             Interval = EarTrainer.CountInterval(Note1, Note2);
             OnPropertyChanged(nameof(IntervalName));
             IsGuessed = true;

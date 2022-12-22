@@ -8,6 +8,10 @@
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Name="global" Title="Ear Trainer" Height="500" Width="450" MinHeight="500" MinWidth="450">
+    <Window.Resources>
+        <local:BrushColorConverter x:Key="BrushColorConverter"/>
+        <local:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="450*"/>
@@ -43,9 +47,16 @@
             <TextBlock Text="/" FontSize="20"/>
             <TextBlock Text="{Binding TotalPuzzleCount}" FontSize="20"/>
         </StackPanel>
-        <local:MusicalNotationIntervalControl Note1="{Binding ElementName=global, Path=DataContext.Note1}" Note2="{Binding ElementName=global, Path=DataContext.Note2}" IntervalVisible="{Binding ElementName=global, Path=DataContext.IsGuessed}" IntervalName="{Binding ElementName=global, Path=DataContext.IntervalName}" HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Center"/>
+        <local:MusicalNotationIntervalControl
+            Note1="{Binding ElementName=global, Path=DataContext.Note1}"
+            Note2="{Binding ElementName=global, Path=DataContext.Note2}"
+            IntervalVisible="{Binding ElementName=global, Path=DataContext.IsGuessed}"
+            IntervalName="{Binding ElementName=global, Path=DataContext.IntervalName}"
+            Foreground="{Binding ElementName=global, Path=DataContext.IsCorrect, Converter={StaticResource BrushColorConverter}}"
+            HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Center"/>
         <StackPanel Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
-            <Button x:Name="ButtonPlay" Command="{Binding PlaySoundsCommand}" Content="▶" Foreground="Green" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center" Width="40" Height="40" Background="{x:Null}" BorderBrush="{x:Null}" ToolTip="Replay Interval"/>
+            <Button x:Name="ButtonPlay" Command="{Binding PlaySoundsCommand}" Content="▶" Foreground="Green" FontSize="24" Width="40" Height="40" Background="{x:Null}" BorderBrush="{x:Null}" ToolTip="Replay Interval"/>
+            <Button x:Name="ButtonNext" Command="{Binding NextPuzzleCommand}" Content="→" Foreground="Blue" FontSize="24" Width="40" Height="40" Background="{x:Null}" BorderBrush="{x:Null}" ToolTip="Next Puzzle"/>
         </StackPanel>
         <ItemsControl ItemsSource="{Binding PossibleIntervals}" Grid.Row="4" Height="30" Width="395">
             <ItemsControl.ItemsPanel>
@@ -55,7 +66,7 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Button Content="{Binding IntervalShortName}" Command="{Binding GuessIntervalCommand}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30" FontWeight="Bold"/>
+                    <Button Content="{Binding IntervalShortName}" Command="{Binding GuessIntervalCommand}" IsEnabled="{Binding ElementName=global, Path=DataContext.IsGuessed, Converter={StaticResource InverseBooleanConverter}}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30" FontWeight="Bold"/>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>

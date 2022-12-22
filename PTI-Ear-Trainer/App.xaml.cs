@@ -36,10 +36,18 @@ namespace PTI_Ear_Trainer
 
             model = new EarTrainer(difficulty);
             viewModel = new PuzzleViewModel(model);
+            viewModel.EarTrainerEnded += ViewModel_EarTrainerEnded;
             gameWindow.DataContext = viewModel;
 
             mainWindow.Hide();
             gameWindow.Show();
+        }
+
+        private void ViewModel_EarTrainerEnded(object? sender, System.EventArgs e)
+        {
+            MessageBox.Show($"Time: {viewModel?.Time}\nCorrect Guesses: {model?.CorrectGuesses}", "Ear Trainer Ended");
+            gameWindow.Hide();
+            mainWindow.Show();
         }
 
         private void GameWindow_ExitCurrentGame(object sender, RoutedEventArgs e)
