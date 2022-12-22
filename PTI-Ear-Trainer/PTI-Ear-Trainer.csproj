@@ -6,10 +6,47 @@
     <RootNamespace>PTI_Ear_Trainer</RootNamespace>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Authors>André Bilik, Ádám Lámfalusi, Dávid Fürdős, Márton Baldauf</Authors>
+    <Company>Eötvös Loránd University (ELTE), Faculty of Informatics</Company>
+    <Copyright>Copyright © André Bilik, Ádám Lámfalusi, Dávid Fürdős, Márton Baldauf 2022</Copyright>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\PTI-Ear-Trainer-Model\PTI-Ear-Trainer-Model.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="View\icon.ico" />
+    <Resource Include="View\logo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Audio\Piano\A.wav" />
+    <Resource Include="Audio\Piano\ASharp.wav" />
+    <Resource Include="Audio\Piano\B.wav" />
+    <Resource Include="Audio\Piano\C.wav" />
+    <Resource Include="Audio\Piano\CSharp.wav" />
+    <Resource Include="Audio\Piano\D.wav" />
+    <Resource Include="Audio\Piano\DSharp.wav" />
+    <Resource Include="Audio\Piano\E.wav" />
+    <Resource Include="Audio\Piano\F.wav" />
+    <Resource Include="Audio\Piano\FSharp.wav" />
+    <Resource Include="Audio\Piano\G.wav" />
+    <Resource Include="Audio\Piano\GSharp.wav" />
+    <Resource Include="Audio\Piano\LowerA.wav" />
+    <Resource Include="Audio\Piano\LowerASharp.wav" />
+    <Resource Include="Audio\Piano\LowerB.wav" />
+    <Resource Include="Audio\Piano\UpperC.wav" />
+    <Resource Include="Audio\Piano\UpperCSharp.wav" />
+    <Resource Include="Audio\Piano\UpperD.wav" />
+    <Resource Include="Audio\Piano\UpperDSharp.wav" />
+    <Resource Include="Audio\Piano\UpperE.wav" />
+    <Resource Include="Audio\Piano\UpperF.wav" />
   </ItemGroup>
 
 </Project>

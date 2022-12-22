@@ -4,11 +4,20 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PTI_Ear_Trainer.View"
+        Icon="icon.ico"
         mc:Ignorable="d"
-        Title="PTI Ear Trainer" Height="500" Width="450" MinHeight="500" MinWidth="450">
+        WindowStartupLocation="CenterScreen"
+        Name="global" Title="Ear Trainer" Height="500" Width="450" MinHeight="500" MinWidth="450">
+    <Window.Resources>
+        <local:BrushColorConverter x:Key="BrushColorConverter"/>
+        <local:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
+    </Window.Resources>
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="450*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="5*"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="10*"/>
             <RowDefinition Height="40*"/>
             <RowDefinition Height="10*"/>
@@ -16,29 +25,53 @@
             <RowDefinition Height="10*"/>
             <RowDefinition Height="5*"/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
-            <Label x:Name="LabelGuessNumber" Content="1/10" FontSize="20" />
+        <Menu Grid.Row="0" x:Name="menu">
+            <MenuItem Header="Game">
+                <MenuItem x:Name="newGame" Header="New game" HorizontalAlignment="Left" Width="190" Click="NewGame_Click"/>
+                <Separator/>
+                <MenuItem x:Name="normal" Header="Windowed" HorizontalAlignment="Left" Width="180" IsChecked="True" Click="NormalClick"/>
+                <MenuItem x:Name="maximize" Header="Maximized" HorizontalAlignment="Left" Width="180" Click="MaximizeClick"/>
+                <Separator/>
+                <MenuItem x:Name="MenuItemExitCurrentGame" Header="Exit current game" HorizontalAlignment="Left" Width="190"/>
+                <MenuItem x:Name="appExit" Header="Close" HorizontalAlignment="Left" Width="190" Click="Close"/>
+            </MenuItem>
+            <MenuItem x:Name="leaderboard" Header="Leaderboard" HorizontalAlignment="Left" Click="OpenLeaderboard"/>
+            <MenuItem Header="About">
+                <MenuItem x:Name="tutorial" Header="How to play" HorizontalAlignment="Left" Width="170" Click="OpenHTP"/>
+                <Separator/>
+                <MenuItem x:Name="about" Header="About" HorizontalAlignment="Left" Width="170" Click="OpenAbout"/>
+            </MenuItem>
+        </Menu>
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Grid.Column="1">
+            <TextBlock Text="{Binding PuzzleNumber}" FontSize="20"/>
+            <TextBlock Text="/" FontSize="20"/>
+            <TextBlock Text="{Binding TotalPuzzleCount}" FontSize="20"/>
         </StackPanel>
+        <local:MusicalNotationIntervalControl
+            Note1="{Binding ElementName=global, Path=DataContext.Note1}"
+            Note2="{Binding ElementName=global, Path=DataContext.Note2}"
+            IntervalVisible="{Binding ElementName=global, Path=DataContext.IsGuessed}"
+            IntervalName="{Binding ElementName=global, Path=DataContext.IntervalName}"
+            Foreground="{Binding ElementName=global, Path=DataContext.IsCorrect, Converter={StaticResource BrushColorConverter}}"
+            HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Center"/>
         <StackPanel Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
-            <Button x:Name="ButtonPlay" Content="▶" Foreground="Green" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center" Width="40" Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Click="ButtonPlay_Click" ToolTip="Replay Interval"/>
+            <Button x:Name="ButtonPlay" Command="{Binding PlaySoundsCommand}" Content="▶" Foreground="Green" FontSize="24" Width="40" Height="40" Background="{x:Null}" BorderBrush="{x:Null}" ToolTip="Replay Interval"/>
+            <Button x:Name="ButtonNext" Command="{Binding NextPuzzleCommand}" Content="→" Foreground="Blue" FontSize="24" Width="40" Height="40" Background="{x:Null}" BorderBrush="{x:Null}" ToolTip="Next Puzzle"/>
         </StackPanel>
-        <StackPanel Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
-            <Button Content="P1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30" Click="ButtonInterval_Click" FontWeight="Bold"/>
-            <Button Content="m2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30" Click="ButtonInterval_Click" FontWeight="Bold"/>
-            <Button Content="M2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30" Click="ButtonInterval_Click" FontWeight="Bold"/>
-            <Button Content="m3" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30" Click="ButtonInterval_Click" FontWeight="Bold"/>
-            <Button Content="M3" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30" Click="ButtonInterval_Click" FontWeight="Bold"/>
-            <Button Content="P4" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30" Click="ButtonInterval_Click" FontWeight="Bold"/>
-            <Button Content="P5" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30" Click="ButtonInterval_Click" FontWeight="Bold"/>
-            <Button Content="m6" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30" Click="ButtonInterval_Click" FontWeight="Bold"/>
-            <Button Content="M6" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30" Click="ButtonInterval_Click" FontWeight="Bold"/>
-            <Button Content="m7" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30" Click="ButtonInterval_Click" FontWeight="Bold"/>
-            <Button Content="M7" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30" Click="ButtonInterval_Click" FontWeight="Bold"/>
-            <Button Content="P8" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30" Click="ButtonInterval_Click" FontWeight="Bold"/>
-        </StackPanel>
+        <ItemsControl ItemsSource="{Binding PossibleIntervals}" Grid.Row="4" Height="30" Width="395">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Button Content="{Binding IntervalShortName}" Command="{Binding GuessIntervalCommand}" IsEnabled="{Binding ElementName=global, Path=DataContext.IsGuessed, Converter={StaticResource InverseBooleanConverter}}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30" FontWeight="Bold"/>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
         <StackPanel Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
-            <Label x:Name="LabelTimer" Content="1:00" FontSize="20" />
+            <Label x:Name="LabelTimer" Content="{Binding Time}" FontSize="20" />
         </StackPanel>
-        <local:MusicalNotationIntervalControl HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Center"/>
     </Grid>
 </Window>
