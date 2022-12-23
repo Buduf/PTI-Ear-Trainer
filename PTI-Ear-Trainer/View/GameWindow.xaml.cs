@@ -13,11 +13,6 @@ namespace PTI_Ear_Trainer.View
             InitializeComponent();
         }
 
-        private void NewGame_Click(object sender, RoutedEventArgs e)
-        {
-            // TODO
-        }
-
         private void Close(object sender, RoutedEventArgs e)
         {
             Close();

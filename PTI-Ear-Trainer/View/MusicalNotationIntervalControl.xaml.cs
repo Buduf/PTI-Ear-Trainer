@@ -175,13 +175,10 @@ namespace PTI_Ear_Trainer.View
 
         private void updateHelperLines()
         {
-            if (IntervalVisible)
-            {
-                HelperLine1.Visibility = IntervalVisible && Note1 < Note.D || Note2 < Note.D ?
-                    Visibility.Visible : Visibility.Hidden;
-                HelperLine2.Visibility = IntervalVisible && Note1 < Note.LowerB || Note2 < Note.LowerB ?
-                    Visibility.Visible : Visibility.Hidden;
-            }
+            HelperLine1.Visibility = IntervalVisible && (Note1 < Note.D || Note2 < Note.D) ?
+                Visibility.Visible : Visibility.Hidden;
+            HelperLine2.Visibility = IntervalVisible && (Note1 < Note.LowerB || Note2 < Note.LowerB) ?
+                Visibility.Visible : Visibility.Hidden;
         }
 
         private static readonly Note[] sharpNotes = { Note.LowerASharp, Note.CSharp, Note.DSharp, Note.FSharp, Note.GSharp, Note.ASharp, Note.UpperCSharp, Note.UpperDSharp };

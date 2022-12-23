@@ -27,7 +27,7 @@
         </Grid.RowDefinitions>
         <Menu Grid.Row="0" x:Name="menu">
             <MenuItem Header="Game">
-                <MenuItem x:Name="newGame" Header="New game" HorizontalAlignment="Left" Width="190" Click="NewGame_Click"/>
+                <MenuItem x:Name="MenuItemNewGame" Header="New game" HorizontalAlignment="Left" Width="190"/>
                 <Separator/>
                 <MenuItem x:Name="normal" Header="Windowed" HorizontalAlignment="Left" Width="180" IsChecked="True" Click="NormalClick"/>
                 <MenuItem x:Name="maximize" Header="Maximized" HorizontalAlignment="Left" Width="180" Click="MaximizeClick"/>
