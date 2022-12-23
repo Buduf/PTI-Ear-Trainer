@@ -7,10 +7,20 @@
         mc:Ignorable="d"
         Icon="icon.ico"
         WindowStartupLocation="CenterScreen"
-        Title="How to Play" Height="200" Width="300" MinHeight="200" MinWidth="300"
+        Title="How to Play" Height="276" Width="570" MinHeight="200" MinWidth="300"
         ResizeMode="NoResize">
     <Grid>
-        <TextBlock x:Name="Description" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,0" TextWrapping="Wrap" Height="115" Width="280"/>
-        <Button Content="Close" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,100,0,0" Height="25" Width="50" Click="Close"/>
+        <TextBlock x:Name="Description" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,0" TextWrapping="Wrap" Height="168">
+            The game is simple.<LineBreak/>
+            It will play two notes, and you have to guess what interval was it exactly.<LineBreak/>
+            The different diffculties give you more and more opportuninity to chose from the intervals.<LineBreak/>
+            For example, in easy mode you can choose from 6 and on medium, you can choose from 9.<LineBreak/>
+            <LineBreak/>
+            There are also 3 different game modes.<LineBreak/>
+            In practice mode, the game plays the music and you can choose a note.<LineBreak/>
+            In ranked mode, at the end of the game, your name and your point will be saved to the leaderboard.<LineBreak/>
+            After all, in survival mode the game runs until your first miss.
+        </TextBlock>
+        <Button Content="Close" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,183,0,0" Height="25" Width="50" Click="Close"/>
     </Grid>
 </Window>
