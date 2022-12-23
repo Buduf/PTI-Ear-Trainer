@@ -10,6 +10,7 @@
     <Authors>André Bilik, Ádám Lámfalusi, Dávid Fürdős, Márton Baldauf</Authors>
     <Company>Eötvös Loránd University (ELTE), Faculty of Informatics</Company>
     <Copyright>Copyright © André Bilik, Ádám Lámfalusi, Dávid Fürdős, Márton Baldauf 2022</Copyright>
+    <ApplicationIcon>View\icon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
