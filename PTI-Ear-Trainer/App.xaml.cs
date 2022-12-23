@@ -17,13 +17,15 @@ namespace PTI_Ear_Trainer
 
         public App()
         {
+            ShutdownMode = ShutdownMode.OnExplicitShutdown;
             gameWindow.MenuItemExitCurrentGame.Click += GameWindow_ExitCurrentGame;
-            mainWindow.ButtonNewGame.Click += MainWindow_NewGame;
-            mainWindow.MenuItemNewGame.Click += MainWindow_NewGame;
+            gameWindow.MenuItemNewGame.Click += OnNewGame;
+            mainWindow.ButtonNewGame.Click += OnNewGame;
+            mainWindow.MenuItemNewGame.Click += OnNewGame;
             mainWindow.Show();
         }
 
-        private void MainWindow_NewGame(object sender, RoutedEventArgs e)
+        private void OnNewGame(object sender, RoutedEventArgs e)
         {
             string name = mainWindow.TextBoxName.Text;
             if (name.Length < 3)
