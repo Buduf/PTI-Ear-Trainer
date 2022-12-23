@@ -10,7 +10,6 @@ namespace PTI_Ear_Trainer.View
         public Howtoplay()
         {
             InitializeComponent();
-            Description.Text = "";
         }
 
         private void Close(object sender, RoutedEventArgs e)
